@@ -8,6 +8,7 @@ import { Roboto, Roboto_Mono } from "next/font/google";
 import { domAnimation, LazyMotion } from "motion/react";
 import { LenisWrapper } from "@/lenisWrapper";
 import Background from "@/components/background";
+import Header from "@/components/header";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
                 className={`${Thunder.className} ${roboto.variable} ${robotoMono.variable} antialiased h-full bg-secondary-500`}
             >
                 <LazyMotion features={domAnimation} strict>
+                    <Header />
                     <LenisWrapper>{children}</LenisWrapper>
                     <Background />
                 </LazyMotion>
