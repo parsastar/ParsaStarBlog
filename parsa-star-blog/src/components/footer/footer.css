@@ -1,0 +1,9 @@
+
+.animated-text {
+    color: transparent;
+    background: linear-gradient(to bottom, red 50%, #f0f0f0 50%);
+    background-size: 100% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

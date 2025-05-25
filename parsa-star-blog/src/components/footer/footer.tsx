@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
-import { useScroll } from "motion/react";
+import FooterContent from "./footerCotent";
 
 const Footer = () => {
     return (
@@ -14,7 +14,7 @@ const Footer = () => {
                 className="relative  h-[400px] bg-dark-green-500 w-full overflow-hidden"
             >
                 <div className="fixed h-[400px] bottom-0 container left-1/2 -translate-x-1/2 flex flex-col   w-full gap-0">
-                    footer
+                    <FooterContent />
                 </div>
             </div>
         </footer>
