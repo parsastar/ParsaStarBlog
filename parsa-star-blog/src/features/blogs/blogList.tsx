@@ -1,10 +1,10 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef } from "react";
+import React from "react";
 import { ArrowRight } from "lucide-react";
-import { m, useScroll, useSpring, useTransform } from "motion/react";
+
 import { TBlog, TBlogs } from "@/types/api/blog";
+import AnimatedLine from "@/components/animatedLine";
 
 const BlogList = ({ blogs }: { blogs: TBlogs }) => {
     const MappedBlogs: TBlogs[] = [];
@@ -17,7 +17,7 @@ const BlogList = ({ blogs }: { blogs: TBlogs }) => {
         <div className="w-full items-center justify-center  grid grid-cols-1">
             {MappedBlogs.map((blogs, index) => (
                 <React.Fragment key={index}>
-                    <BlogLine />
+                    <AnimatedLine />
                     <div className="w-full z-[3] relative grid grid-cols-2 gap-0 ">
                         {blogs.map((blog, i) => (
                             <BlogCard key={blog.id} blog={blog} index={i} />
@@ -25,7 +25,7 @@ const BlogList = ({ blogs }: { blogs: TBlogs }) => {
                     </div>
                 </React.Fragment>
             ))}
-            <BlogLine />
+            <AnimatedLine />
         </div>
     );
 };
@@ -76,29 +76,6 @@ const BlogCard = ({ blog, index }: { blog: TBlog; index: number }) => {
                     </div>
                 </div>
             </div>
-        </div>
-    );
-};
-
-const BlogLine = () => {
-    const container = useRef<HTMLDivElement | null>(null);
-    const { scrollYProgress } = useScroll({
-        target: container,
-        offset: ["start end", "end start"],
-    });
-    const LineScaleX = useSpring(
-        useTransform(scrollYProgress, [0, 0.07], [0, 1]),
-        { stiffness: 80, damping: 30 }
-    );
-    return (
-        <div
-            ref={container}
-            className="flex  w-full h-fit flex-col items-center  gap-0"
-        >
-            <m.div
-                style={{ scaleX: LineScaleX }}
-                className="w-[calc(100%-1px)] origin-center mx-auto h-[1px] bg-primary-500 z-[4] relative"
-            />
         </div>
     );
 };
