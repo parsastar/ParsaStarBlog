@@ -25,9 +25,7 @@ const BlogList = ({ blogs }: { blogs: TBlogs }) => {
                     </div>
                 </React.Fragment>
             ))}
-
-            <div className="w-[calc(100%-1px)] origin-center mx-auto h-[1px] bg-primary-500 z-[4] relative" />
-            <div className="w-[calc(50%-2px)] bg-secondary-500  py-10 mx-auto -translate-x-[.5px]"></div>
+            <BlogLine />
         </div>
     );
 };

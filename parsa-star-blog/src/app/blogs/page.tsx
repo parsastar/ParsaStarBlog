@@ -2,6 +2,7 @@ import BlogHead from "@/features/blogs/blogHead";
 import { GetAllBlogs } from "../api/blog";
 import BlogList from "@/features/blogs/blogList";
 import { BlogDataTransfer } from "@/utils/blog";
+import { PaginationList } from "@/components/paginationList";
 
 // assuming you have this
 
@@ -21,6 +22,13 @@ const Page = async ({
         <div className="w-full mx-auto container flex flex-col items-center ">
             <BlogHead />
             <BlogList blogs={blogs} />
+
+            <div className="w-[calc(50%-2px)] bg-secondary-500  py-10 mx-auto -translate-x-[.5px]">
+                <PaginationList
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                />
+            </div>
         </div>
     );
 };
