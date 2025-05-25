@@ -10,3 +10,10 @@ export type TBlogs = TBlog[];
 
 export type TFetchBlog = Omit<TBlog, "image" | "date">;
 export type TFetchBlogs = TFetchBlog[];
+
+export type TStructuredBlogs = {
+    blogs: TBlogs;
+    currentPage: number;
+    totalPages: number;
+    pageSize: number;
+};

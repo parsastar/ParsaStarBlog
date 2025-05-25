@@ -20,3 +20,5 @@ export const Socials = [
         href: "https://github.com/parsastar",
     },
 ];
+
+export const pageSizes = { blogs: 10 };
