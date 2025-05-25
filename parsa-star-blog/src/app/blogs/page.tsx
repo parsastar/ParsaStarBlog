@@ -1,19 +1,18 @@
-import React, { Suspense } from "react";
+import BlogHead from "@/features/blogs/blogHead";
 import { GetAllBlogs } from "../api/blog";
-import BlogHead from "@/features/blogs/bloghead";
+import BlogList from "@/features/blogs/blogList";
+import { BlogDataTransfer } from "@/utils/blog";
+
+// assuming you have this
 
 const Page = async () => {
-    const BlogWithoutImage = await GetAllBlogs();
-    const Blogs = BlogWithoutImage.map((blog) => ({
-        ...blog,
-        image: `https://picsum.photos/seed/${blog.id}/500/300`,
-    }));
+    const blogWithoutImage = await GetAllBlogs();
+    const blogs = BlogDataTransfer({ blogs: blogWithoutImage });
     return (
-        <Suspense fallback={"loading.."}>
-            <div className="w-screen  mx-auto container flex flex-col gap-0 items-center justify-center  ">
-                <BlogHead />
-            </div>
-        </Suspense>
+        <div className="w-full mx-auto container flex flex-col items-center ">
+            <BlogHead />
+            <BlogList blogs={blogs} />
+        </div>
     );
 };
 
