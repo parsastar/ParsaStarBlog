@@ -2,7 +2,7 @@ import React from "react";
 import BlogTitle from "./blogTitle";
 // import BlogPaginate from "./blogPahinate";
 
-const BlogHeader = ({ currentPage }: { currentPage: number }) => {
+const BlogHeader = () => {
     return (
         <div className="w-full flex justify-center">
             {/* <BlogPaginate currentPage={currentPage} /> */}

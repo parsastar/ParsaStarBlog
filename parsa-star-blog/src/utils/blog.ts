@@ -18,7 +18,7 @@ export const BlogsDataTransfer = ({
     const currentPage = Number(params.page || 1);
 
     // adding  image and fake date to each blog
-    const newBlogList = blogs.map((blog, index) => ({
+    const newBlogList = blogs.map((blog) => ({
         ...blog,
         image: `https://picsum.photos/seed/${blog.id}/500/300`,
         date: new Date(

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-
 import localFont from "next/font/local";
 
 import { Roboto, Roboto_Mono } from "next/font/google";
@@ -32,6 +31,9 @@ const Thunder = localFont({
 export const metadata: Metadata = {
     title: "Parsa Star",
     description: "Welcome to Paras Star Blog Page",
+    icons: {
+        icon: "/favicon.ico",
+    },
 };
 
 export default function RootLayout({
@@ -39,7 +41,6 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-
     return (
         <html lang="en">
             <body

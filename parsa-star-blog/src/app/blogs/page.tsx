@@ -20,7 +20,7 @@ const Page = async ({
 
     return (
         <div className="w-full mx-auto container flex flex-col items-center ">
-            <BlogHeader currentPage={currentPage} />
+            <BlogHeader  />
             <BlogList blogs={blogs} />
 
             <div className="w-full sm:w-[calc(50%-2px)] bg-secondary-500  py-10 mx-auto -translate-x-[.5px]">
