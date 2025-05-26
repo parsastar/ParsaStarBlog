@@ -9,111 +9,106 @@ export default {
         "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
-    	extend: {
-    		fontFamily: {
-    			roboto: 'var(--font-roboto)',
-    			roboto_mono: 'var(--font-roboto-mono)'
-    		},
-    		fontSize: {
-    			logo: '2.188rem',
-    			title: '4.375rem',
-    			subtitle: '1.125rem',
-    			blogTitle: '1.563rem',
-    			description: '0.938rem'
-    		},
-    		colors: {
-    			primary: {
-    				'100': '#ececec',
-    				'200': '#d9d9d9',
-    				'300': '#c6c6c6',
-    				'400': '#b3b3b3',
-    				'500': '#a0a0a0',
-    				'600': '#808080',
-    				'700': '#606060',
-    				'800': '#404040',
-    				'900': '#202020',
-    				DEFAULT: 'hsl(var(--primary))',
-    				foreground: 'hsl(var(--primary-foreground))'
-    			},
-    			secondary: {
-    				'100': '#fcfcfc',
-    				'200': '#f9f9f9',
-    				'300': '#f6f6f6',
-    				'400': '#f3f3f3',
-    				'500': '#f0f0f0',
-    				'600': '#E6E6E6',
-    				'700': '#909090',
-    				'800': '#606060',
-    				'900': '#303030',
-    				DEFAULT: 'hsl(var(--secondary))',
-    				foreground: 'hsl(var(--secondary-foreground))'
-    			},
-    			red: {
-    				'100': '#ffcccc',
-    				'200': '#ff9999',
-    				'300': '#ff6666',
-    				'400': '#ff3333',
-    				'500': '#ff0000',
-    				'600': '#cc0000',
-    				'700': '#990000',
-    				'800': '#660000',
-    				'900': '#330000'
-    			},
-    			darkGrey: {
-    				'100': '#d8d8d8',
-    				'200': '#b1b1b1',
-    				'300': '#8a8a8a',
-    				'400': '#636363',
-    				'500': '#3c3c3c',
-    				'600': '#303030',
-    				'700': '#242424',
-    				'800': '#181818',
-    				'900': '#0c0c0c'
-    			},
-    			background: 'hsl(var(--background))',
-    			foreground: 'hsl(var(--foreground))',
-    			card: {
-    				DEFAULT: 'hsl(var(--card))',
-    				foreground: 'hsl(var(--card-foreground))'
-    			},
-    			popover: {
-    				DEFAULT: 'hsl(var(--popover))',
-    				foreground: 'hsl(var(--popover-foreground))'
-    			},
-    			muted: {
-    				DEFAULT: 'hsl(var(--muted))',
-    				foreground: 'hsl(var(--muted-foreground))'
-    			},
-    			accent: {
-    				DEFAULT: 'hsl(var(--accent))',
-    				foreground: 'hsl(var(--accent-foreground))'
-    			},
-    			destructive: {
-    				DEFAULT: 'hsl(var(--destructive))',
-    				foreground: 'hsl(var(--destructive-foreground))'
-    			},
-    			border: 'hsl(var(--border))',
-    			input: 'hsl(var(--input))',
-    			ring: 'hsl(var(--ring))',
-    			chart: {
-    				'1': 'hsl(var(--chart-1))',
-    				'2': 'hsl(var(--chart-2))',
-    				'3': 'hsl(var(--chart-3))',
-    				'4': 'hsl(var(--chart-4))',
-    				'5': 'hsl(var(--chart-5))',
-    				'1': 'hsl(var(--chart-1))',
-    				'2': 'hsl(var(--chart-2))',
-    				'3': 'hsl(var(--chart-3))',
-    				'4': 'hsl(var(--chart-4))',
-    				'5': 'hsl(var(--chart-5))'
-    			}
-    		},
-    		borderRadius: {
-    			lg: 'var(--radius)',
-    			md: 'calc(var(--radius) - 2px)',
-    			sm: 'calc(var(--radius) - 4px)'
-    		}
-    	}
+        extend: {
+            fontFamily: {
+                roboto: "var(--font-roboto)",
+                roboto_mono: "var(--font-roboto-mono)",
+            },
+            fontSize: {
+                logo: "2.188rem",
+                title: "4.375rem",
+                subtitle: "1.125rem",
+                blogTitle: "1.563rem",
+                description: "0.938rem",
+            },
+            colors: {
+                primary: {
+                    "100": "#ececec",
+                    "200": "#d9d9d9",
+                    "300": "#c6c6c6",
+                    "400": "#b3b3b3",
+                    "500": "#a0a0a0",
+                    "600": "#808080",
+                    "700": "#606060",
+                    "800": "#404040",
+                    "900": "#202020",
+                    DEFAULT: "hsl(var(--primary))",
+                    foreground: "hsl(var(--primary-foreground))",
+                },
+                secondary: {
+                    "100": "#fcfcfc",
+                    "200": "#f9f9f9",
+                    "300": "#f6f6f6",
+                    "400": "#f3f3f3",
+                    "500": "#f0f0f0",
+                    "600": "#E6E6E6",
+                    "700": "#909090",
+                    "800": "#606060",
+                    "900": "#303030",
+                    DEFAULT: "hsl(var(--secondary))",
+                    foreground: "hsl(var(--secondary-foreground))",
+                },
+                red: {
+                    "100": "#ffcccc",
+                    "200": "#ff9999",
+                    "300": "#ff6666",
+                    "400": "#ff3333",
+                    "500": "#ff0000",
+                    "600": "#cc0000",
+                    "700": "#990000",
+                    "800": "#660000",
+                    "900": "#330000",
+                },
+                darkGrey: {
+                    "100": "#d8d8d8",
+                    "200": "#b1b1b1",
+                    "300": "#8a8a8a",
+                    "400": "#636363",
+                    "500": "#3c3c3c",
+                    "600": "#303030",
+                    "700": "#242424",
+                    "800": "#181818",
+                    "900": "#0c0c0c",
+                },
+                background: "hsl(var(--background))",
+                foreground: "hsl(var(--foreground))",
+                card: {
+                    DEFAULT: "hsl(var(--card))",
+                    foreground: "hsl(var(--card-foreground))",
+                },
+                popover: {
+                    DEFAULT: "hsl(var(--popover))",
+                    foreground: "hsl(var(--popover-foreground))",
+                },
+                muted: {
+                    DEFAULT: "hsl(var(--muted))",
+                    foreground: "hsl(var(--muted-foreground))",
+                },
+                accent: {
+                    DEFAULT: "hsl(var(--accent))",
+                    foreground: "hsl(var(--accent-foreground))",
+                },
+                destructive: {
+                    DEFAULT: "hsl(var(--destructive))",
+                    foreground: "hsl(var(--destructive-foreground))",
+                },
+                border: "hsl(var(--border))",
+                input: "hsl(var(--input))",
+                ring: "hsl(var(--ring))",
+                chart: {
+                    "1": "hsl(var(--chart-1))",
+                    "2": "hsl(var(--chart-2))",
+                    "3": "hsl(var(--chart-3))",
+                    "4": "hsl(var(--chart-4))",
+                    "5": "hsl(var(--chart-5))",
+                },
+            },
+            borderRadius: {
+                lg: "var(--radius)",
+                md: "calc(var(--radius) - 2px)",
+                sm: "calc(var(--radius) - 4px)",
+            },
+        },
     },
     plugins: [require("tailwindcss-animate")],
 } satisfies Config;

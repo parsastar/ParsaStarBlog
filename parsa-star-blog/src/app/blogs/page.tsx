@@ -13,7 +13,7 @@ const Page = async ({
 }) => {
     const Params = await searchParams;
     const blogWithoutImage = await GetAllBlogs();
-    const { blogs, currentPage, pageSize, totalPages } = BlogDataTransfer({
+    const { blogs, currentPage, totalPages } = BlogDataTransfer({
         blogs: blogWithoutImage,
         params: Params,
     });
