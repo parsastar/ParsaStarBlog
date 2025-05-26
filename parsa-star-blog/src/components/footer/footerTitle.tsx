@@ -71,7 +71,7 @@ const LogoChar = ({
     width: number;
     scrollYProgress: MotionValue<number>;
 }) => {
-    const bgPosY = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+    const bgPosY = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
     // Apply spring animation to the numeric value
     const springBgPosY = useSpring(bgPosY, {
