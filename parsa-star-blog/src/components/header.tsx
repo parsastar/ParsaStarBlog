@@ -5,7 +5,7 @@ import { m } from "motion/react";
 import { SiteInfo } from "@/constant/general";
 const Header = () => {
     return (
-        <div className="w-screen sticky  z-[100] left-0 top-0 flex bg-secondary-500 justify-center border-b border-[#A0A0A0]">
+        <header className="w-screen sticky  z-[100] left-0 top-0 flex bg-secondary-500 justify-center border-b border-[#A0A0A0]">
             <div className="w-full relative flex gap-10 items-center container  p-3 px-5">
                 <HeaderBackground />
                 <Link
@@ -15,7 +15,7 @@ const Header = () => {
                     {SiteInfo.siteName}
                 </Link>
             </div>
-        </div>
+        </header>
     );
 };
 

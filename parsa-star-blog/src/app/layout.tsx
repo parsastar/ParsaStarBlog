@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./custom.css";
+
 
 import localFont from "next/font/local";
 
@@ -9,6 +9,7 @@ import { domAnimation, LazyMotion } from "motion/react";
 import { LenisWrapper } from "@/lenisWrapper";
 import Background from "@/components/background";
 import Header from "@/components/header";
+import Footer from "@/components/footer/footer";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -38,7 +39,7 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    console.log(robotoMono.variable);
+
     return (
         <html lang="en">
             <body
@@ -48,6 +49,7 @@ export default function RootLayout({
                     <Header />
                     <LenisWrapper>{children}</LenisWrapper>
                     <Background />
+                    <Footer />
                 </LazyMotion>
             </body>
         </html>
