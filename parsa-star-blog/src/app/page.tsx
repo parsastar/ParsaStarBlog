@@ -13,7 +13,7 @@ export default function Home() {
                 </h1>
                 <Link
                     href={"/blogs"}
-                    className="flex items-center justify-center text-red-500 hover:text-secondary-500 hover:bg-red-500 duration-200 p-3 px-5 sm:p-4 sm:px-7 lg:p-5 lg:px-10 font-roboto text-subtitle sm:text-xl  lg:text-blogTitle hover:gap-5     rounded-sm border border-red-500 gap-2 "
+                    className="flex items-center justify-center text-red-500 hover:text-secondary-500 hover:bg-red-500 duration-200 p-3 px-5 sm:p-4 sm:px-7 lg:p-5 lg:px-10 font-roboto font-medium text-subtitle sm:text-xl  lg:text-blogTitle hover:gap-5     rounded-sm border border-red-500 gap-2 "
                 >
                     {" "}
                     Go to Blogs{" "}
