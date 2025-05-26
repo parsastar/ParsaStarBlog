@@ -19,7 +19,7 @@ const AnimatedLine = ({
         { stiffness: 80, damping }
     );
     return (
-        <div className="flex relative  w-full h-fit flex-col items-center  gap-0">
+        <div className="flex relative pointer-events-none  w-full h-fit flex-col items-center  gap-0">
             <div
                 className="h-[20vh] absolute top-0 z-[-10 ]  w-full"
                 ref={container}

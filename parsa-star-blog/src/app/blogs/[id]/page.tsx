@@ -15,7 +15,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             {/* Header */}
             <div className="w-full items-center flex justify-between">
                 <BackButton />
-                <p className="text-darkGrey-500 px-2 font-mono h-fit text-subtitle w-[calc(25%-1.5px)] translate-x-[.5px] text-right">
+                <p className="text-darkGrey-500 px-2 font-roboto h-fit text-subtitle w-[calc(25%-1.5px)] translate-x-[.5px] text-right">
                     {blog.date}
                 </p>
             </div>
