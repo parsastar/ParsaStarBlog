@@ -23,7 +23,7 @@ const Page = async ({
             <BlogHead />
             <BlogList blogs={blogs} />
 
-            <div className="w-[calc(50%-2px)] bg-secondary-500  py-10 mx-auto -translate-x-[.5px]">
+            <div className="w-full sm:w-[calc(50%-2px)] bg-secondary-500  py-10 mx-auto -translate-x-[.5px]">
                 <PaginationList
                     currentPage={currentPage}
                     totalPages={totalPages}

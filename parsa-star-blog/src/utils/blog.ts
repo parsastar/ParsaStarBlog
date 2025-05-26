@@ -16,7 +16,7 @@ export const BlogsDataTransfer = ({
 }): TStructuredBlogs => {
     const pageSize = Number(params.pageSize || pageSizes.blogs);
     const currentPage = Number(params.page || 1);
-    console.log(pageSize);
+
     // adding  image and fake date to each blog
     const newBlogList = blogs.map((blog, index) => ({
         ...blog,
@@ -34,7 +34,7 @@ export const BlogsDataTransfer = ({
     }
 
     const totalPages = result.length;
-    console.log(result);
+
     return {
         blogs: result[currentPage - 1] || [],
         currentPage,

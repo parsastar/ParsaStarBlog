@@ -18,7 +18,7 @@ const BlogList = ({ blogs }: { blogs: TBlogs }) => {
             {MappedBlogs.map((blogs, index) => (
                 <React.Fragment key={index}>
                     <AnimatedLine />
-                    <div className="w-full z-[3] relative grid grid-cols-2 gap-0 ">
+                    <div className="w-full z-[3] relative grid grid-cols-1 sm:grid-cols-2 gap-0 ">
                         {blogs.map((blog, i) => (
                             <BlogCard key={blog.id} blog={blog} index={i} />
                         ))}
@@ -38,7 +38,7 @@ const BlogCard = ({ blog, index }: { blog: TBlog; index: number }) => {
             key={blog.id}
             className={` w-[calc(100%-1.5px)] translate-x-[${
                 index % 2 == 0 ? "-.5px" : "-1px"
-            }] group mx-auto duration-200  hover:bg-secondary-600 origin-center   p-14 `}
+            }] group mx-auto duration-200  hover:bg-secondary-600 origin-center   p-8 lg:p-14 `}
         >
             <div className="flex flex-col  h-full   duration-200 group-hover:bg-secondary-600 bg-secondary-500 gap-5">
                 <div className="w-full shrink-0 grow-0  overflow-hidden rounded-md aspect-[16/11] border border-primary-500 relative">
@@ -52,10 +52,10 @@ const BlogCard = ({ blog, index }: { blog: TBlog; index: number }) => {
                 </div>
                 <div className="flex h-full font-roboto flex-col justify-between gap-10">
                     <div className="flex flex-col gap-2">
-                        <p className="font-roboto_mono font-medium text-blogTitle text-black">
+                        <p className="font-roboto_mono font-medium text-xl line-clamp-4 lg:text-blogTitle text-black">
                             {blog.title}
                         </p>
-                        <p className=" font-medium text-description text-darkGrey-500">
+                        <p className=" font-normal text-description text-darkGrey-400">
                             {blog.body}
                         </p>
                     </div>

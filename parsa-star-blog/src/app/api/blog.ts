@@ -20,7 +20,8 @@ export const GetBlog = async ({
 }): Promise<TFetchBlog> => {
     try {
         const res = await fetch(
-            `https://jsonplaceholder.typicode.com/posts/${blogId}`
+            `https://jsonplaceholder.typicode.com/posts/${blogId}`,
+            { next: { revalidate: 60 } }
         );
         if (!res.ok) throw new Error("Network error");
         return await res.json();

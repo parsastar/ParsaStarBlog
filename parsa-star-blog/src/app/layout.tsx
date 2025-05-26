@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./custom.css";
+
 
 import localFont from "next/font/local";
 
@@ -39,7 +39,7 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    console.log(robotoMono.variable);
+
     return (
         <html lang="en">
             <body

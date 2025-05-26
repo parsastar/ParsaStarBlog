@@ -40,7 +40,7 @@ export function PaginationList({
                 pages.push(
                     <PaginationItem key={i}>
                         <PaginationLink
-                            className={`size-[50px] !shadow-none shrink-0 grow-0 font-bold   border border-red-500 rounded-[2px]  text-[30px] ${
+                            className={` size-[40px] lg:size-[50px] !shadow-none shrink-0 grow-0 font-bold   border border-red-500 rounded-[2px] sm:text-subtitle text-description  lg:text-[30px] ${
                                 currentPage == i
                                     ? " bg-red-500 text-secondary-500 hover:text-secondary-500 hover:bg-red-500 "
                                     : "text-red-500 bg-secondary-500 hover:text-secondary-500 hover:bg-red-400 "
@@ -57,7 +57,7 @@ export function PaginationList({
             ) {
                 pages.push(
                     <PaginationEllipsis
-                        className="size-[50px] text-red-500"
+                        className=" size-[40px] lg:size-[50px] text-red-500"
                         key={`ellipsis-${i}`}
                     />
                 );
@@ -68,19 +68,19 @@ export function PaginationList({
     };
 
     return (
-        <Pagination dir="ltr">
-            <PaginationContent>
+        <Pagination dir="ltr" >
+            <PaginationContent className="w-full px-5  justify-center">
                 <PaginationItem>
                     <Button
                         variant={"ghost"}
-                        className="h-fit w-fit sm:block hidden px-0 py-0"
+                        className="h-fit w-fit    px-0 py-0"
                         disabled={currentPage - 1 <= 0}
                     >
                         <PaginationPrevious
-                            className={`flex  items-center justify-center p-0 size-[50px] bg-red-500 border border-red-500 rounded-[2px] hover:bg-red-400`}
+                            className={`flex  items-center justify-center p-0  size-[40px] lg:size-[50px] bg-red-500 border border-red-500 rounded-[2px] hover:bg-red-400`}
                             href={toWhere(String(currentPage - 1))}
                         >
-                            <ArrowRight className="!size-[25px] shrink-0 rotate-180 grow-0 text-secondary-500 " />
+                            <ArrowRight className="size-[20px] lg:!size-[25px] shrink-0 rotate-180 grow-0 text-secondary-500 " />
                         </PaginationPrevious>
                     </Button>
                 </PaginationItem>
@@ -88,11 +88,11 @@ export function PaginationList({
                 <PaginationItem>
                     <Button
                         variant={"ghost"}
-                        className="h-fit w-fit sm:block hidden px-0 py-0"
+                        className="h-fit w-fit   px-0 py-0"
                         disabled={currentPage + 1 > totalPages}
                     >
                         <PaginationNext
-                            className={`flex items-center justify-center p-0 size-[50px] bg-red-500 border border-red-500 rounded-[2px] hover:bg-red-400`}
+                            className={`flex items-center justify-center p-0  size-[40px] lg:size-[50px] bg-red-500 border border-red-500 rounded-[2px] hover:bg-red-400`}
                             href={toWhere(
                                 String(
                                     currentPage + 1 < totalPages
@@ -101,7 +101,7 @@ export function PaginationList({
                                 )
                             )}
                         >
-                            <ArrowRight className="!size-[25px] shrink-0 grow-0 text-secondary-500 " />
+                            <ArrowRight className="size-[20px] lg:!size-[25px] shrink-0 grow-0 text-secondary-500 " />
                         </PaginationNext>
                     </Button>
                 </PaginationItem>
