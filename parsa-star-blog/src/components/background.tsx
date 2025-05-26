@@ -70,7 +70,7 @@ const GridLines: React.FC<GridLineProps> = ({
     scrollYProgress,
 }) => {
     const strokeDashoffset = useSpring(
-        useTransform(scrollYProgress, [0, 0.8], [2718, 0]),
+        useTransform(scrollYProgress, [0, 0.65], [2718, 0]),
         {
             stiffness: 80,
             damping: 30 + Math.abs(index - 2) * 5,

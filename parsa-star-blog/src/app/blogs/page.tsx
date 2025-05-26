@@ -1,7 +1,7 @@
 import BlogHead from "@/features/blogs/blogHead";
 import { GetAllBlogs } from "../api/blog";
 import BlogList from "@/features/blogs/blogList";
-import { BlogDataTransfer } from "@/utils/blog";
+import { BlogsDataTransfer } from "@/utils/blog";
 import { PaginationList } from "@/components/paginationList";
 
 // assuming you have this
@@ -13,7 +13,7 @@ const Page = async ({
 }) => {
     const Params = await searchParams;
     const blogWithoutImage = await GetAllBlogs();
-    const { blogs, currentPage, totalPages } = BlogDataTransfer({
+    const { blogs, currentPage, totalPages } = BlogsDataTransfer({
         blogs: blogWithoutImage,
         params: Params,
     });

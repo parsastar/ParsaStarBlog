@@ -1,7 +1,13 @@
 import { pageSizes } from "@/constant/general";
-import { TBlogs, TFetchBlogs, TStructuredBlogs } from "@/types/api/blog";
+import {
+    TBlog,
+    TBlogs,
+    TFetchBlog,
+    TFetchBlogs,
+    TStructuredBlogs,
+} from "@/types/api/blog";
 
-export const BlogDataTransfer = ({
+export const BlogsDataTransfer = ({
     blogs,
     params,
 }: {
@@ -15,7 +21,9 @@ export const BlogDataTransfer = ({
     const newBlogList = blogs.map((blog, index) => ({
         ...blog,
         image: `https://picsum.photos/seed/${blog.id}/500/300`,
-        date: new Date(Date.now() - index * 24 * 60 * 60 * 1000).toDateString(),
+        date: new Date(
+            Date.now() - blog.id * 24 * 60 * 60 * 1000
+        ).toDateString(),
     }));
 
     const result: TBlogs[] = []; // this is chunks o blogs based on the pageSize
@@ -33,4 +41,17 @@ export const BlogDataTransfer = ({
         totalPages,
         pageSize,
     };
+};
+
+export const SingleBlogTransfer = ({ blog }: { blog: TFetchBlog }): TBlog => {
+    // adding  image and fake date to each blog
+    const newBlogList = {
+        ...blog,
+        image: `https://picsum.photos/seed/${blog.id}/500/300`,
+        date: new Date(
+            Date.now() - blog.id * 24 * 60 * 60 * 1000
+        ).toDateString(),
+    };
+
+    return newBlogList;
 };
