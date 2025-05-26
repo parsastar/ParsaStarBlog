@@ -1,8 +1,8 @@
-import BlogHead from "@/features/blogs/blogHead";
 import { GetAllBlogs } from "../api/blog";
 import BlogList from "@/features/blogs/blogList";
 import { BlogsDataTransfer } from "@/utils/blog";
 import { PaginationList } from "@/components/paginationList";
+import BlogHeader from "@/features/blogs/blogHeader";
 
 // assuming you have this
 
@@ -20,7 +20,7 @@ const Page = async ({
 
     return (
         <div className="w-full mx-auto container flex flex-col items-center ">
-            <BlogHead />
+            <BlogHeader currentPage={currentPage} />
             <BlogList blogs={blogs} />
 
             <div className="w-full sm:w-[calc(50%-2px)] bg-secondary-500  py-10 mx-auto -translate-x-[.5px]">

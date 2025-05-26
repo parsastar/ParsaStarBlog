@@ -2,18 +2,38 @@
 import Link from "next/link";
 import React from "react";
 import { m } from "motion/react";
-import { SiteInfo } from "@/constant/general";
+import { Pages, SiteInfo } from "@/constant/general";
+import { Sparkle } from "lucide-react";
+import { usePathname } from "next/navigation";
+
 const Header = () => {
+    const pathname = usePathname();
     return (
         <header className="w-screen sticky  z-[100] left-0 top-0 flex bg-secondary-500 justify-center border-b border-[#A0A0A0]">
-            <div className="w-full relative flex gap-10 items-center container  p-3 px-5">
+            <div className="w-full relative flex  items-center container  py-3 sm:p-3 px-2 sm:px-5">
                 <HeaderBackground />
                 <Link
-                    className="text-red-500 uppercase font-semibold text-logo z-10 "
+                    className="text-red-500 w-full uppercase font-semibold sm:text-blogTitle text-xl lg:text-logo   z-10 "
                     href="/"
                 >
                     {SiteInfo.siteName}
                 </Link>
+                {Pages.map((page) => (
+                    <Link
+                        key={page.href}
+                        className={` w-full uppercase hover:text-red-300 text-center duration-200 font-semibold sm:text-blogTitle text-xl lg:text-logo   z-10 ${
+                            pathname == page.href
+                                ? "text-red-500 "
+                                : "text-black"
+                        } `}
+                        href={page.href}
+                    >
+                        {page.name}
+                    </Link>
+                ))}
+                <div className="w-full flex justify-end text-red-500">
+                    <Sparkle className="fill-red-500 !size-5 !sm:size-8 lg:!size-10" />
+                </div>
             </div>
         </header>
     );
