@@ -6,6 +6,7 @@ import {
     useSpring,
     useTransform,
 } from "motion/react";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 const Background = () => {
@@ -18,6 +19,7 @@ const Background = () => {
         null
     );
     const linesPositions = [0, 300, 600, 900, 1200];
+    const pathname = usePathname();
     useEffect(() => {
         const updateHeight = () => {
             const windowHeight = document.body.offsetHeight;
@@ -31,6 +33,14 @@ const Background = () => {
             window.removeEventListener("resize", updateHeight); // Cleanup
         };
     }, []);
+    useEffect(() => {
+        const updateHeight = () => {
+            const windowHeight = document.body.offsetHeight;
+            setBackgroundHeight(windowHeight);
+        };
+
+        updateHeight(); // Set initial height
+    }, [pathname]);
 
     return (
         <div
