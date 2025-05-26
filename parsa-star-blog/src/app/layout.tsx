@@ -24,7 +24,7 @@ const robotoMono = Roboto_Mono({
 const Thunder = localFont({
     src: [
         { path: "../fonts/Thunder-BoldLC.ttf", weight: "400" },
-        { path: "../fonts/Thunder-SemiBoldLc.ttf", weight: "500" },
+        { path: "../fonts/Thunder-SemiBoldLC.ttf", weight: "500" },
     ],
 });
 
