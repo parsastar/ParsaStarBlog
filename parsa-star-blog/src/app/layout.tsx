@@ -21,6 +21,12 @@ const robotoMono = Roboto_Mono({
     weight: ["300", "400", "500", "700"],
     variable: "--font-roboto-mono",
 });
+const Thunder = localFont({
+    src: [
+        { path: "../fonts/Thunder-BoldLC.ttf", weight: "400" },
+        { path: "../fonts/Thunder-SemiBoldLC.ttf", weight: "500" },
+    ],
+});
 
 export const metadata: Metadata = {
     title: "Parsa Star",
@@ -38,7 +44,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={` ${roboto.variable} ${robotoMono.variable} antialiased h-full bg-secondary-500`}
+                className={`${Thunder.className} ${roboto.variable} ${robotoMono.variable} antialiased h-full bg-secondary-500`}
             >
                 <LazyMotion features={domAnimation} strict>
                     <Header />
