@@ -1,21 +1,12 @@
-"use client"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { ArrowRight } from "lucide-react";
 
-import { TBlog, TBlogs, TFetchBlogs } from "@/types/api/blog";
+import { TBlog, TBlogs } from "@/types/api/blog";
 import AnimatedLine from "@/components/animatedLine";
-import { BlogsDataTransfer } from "@/utils/blog";
-import { useSearchParams } from "next/navigation";
-import { PaginationList } from "@/components/paginationList";
 
-const BlogList = ({ FetchedBlogs }: { FetchedBlogs: TFetchBlogs }) => {
-    const params = useSearchParams();
-    const { blogs, currentPage, totalPages } = BlogsDataTransfer({
-        blogs: FetchedBlogs,
-        params,
-    });
+const BlogList = ({ blogs }: { blogs: TBlogs }) => {
     const MappedBlogs: TBlogs[] = [];
     for (let i = 0; i < blogs.length; i += 2) {
         const chunk = blogs.slice(i, i + 2);
@@ -23,27 +14,19 @@ const BlogList = ({ FetchedBlogs }: { FetchedBlogs: TFetchBlogs }) => {
     }
 
     return (
-        <>
-            <div className="w-full items-center justify-center  grid grid-cols-1">
-                {MappedBlogs.map((blogs, index) => (
-                    <React.Fragment key={index}>
-                        <AnimatedLine />
-                        <div className="w-full z-[3] relative grid grid-cols-1 sm:grid-cols-2 gap-0 ">
-                            {blogs.map((blog, i) => (
-                                <BlogCard key={blog.id} blog={blog} index={i} />
-                            ))}
-                        </div>
-                    </React.Fragment>
-                ))}
-                <AnimatedLine />
-            </div>
-            <div className="w-full sm:w-[calc(50%-2px)] bg-secondary-500  py-10 mx-auto -translate-x-[.5px]">
-                <PaginationList
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                />
-            </div>
-        </>
+        <div className="w-full items-center justify-center  grid grid-cols-1">
+            {MappedBlogs.map((blogs, index) => (
+                <React.Fragment key={index}>
+                    <AnimatedLine />
+                    <div className="w-full z-[3] relative grid grid-cols-1 sm:grid-cols-2 gap-0 ">
+                        {blogs.map((blog, i) => (
+                            <BlogCard key={blog.id} blog={blog} index={i} />
+                        ))}
+                    </div>
+                </React.Fragment>
+            ))}
+            <AnimatedLine />
+        </div>
     );
 };
 
