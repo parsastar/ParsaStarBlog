@@ -1,9 +1,34 @@
-import { GetBlog } from "@/app/api/blog";
+import { GetAllBlogs, GetBlog } from "@/app/api/blog";
 import AnimatedLine from "@/components/animatedLine";
 import BackButton from "@/components/backButton";
 import { SingleBlogTransfer } from "@/utils/blog";
+import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
+
+export async function generateStaticParams() {
+    const posts = await GetAllBlogs();
+
+    return posts.map((post) => ({
+        id: String(post.id),
+    }));
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+    const { id } = await params;
+
+    // fetch data
+    const blog = await GetBlog({ blogId: id });
+
+    return {
+        title: blog.title,
+        description: `this is a blog about ${blog.title} `,
+    };
+}
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;

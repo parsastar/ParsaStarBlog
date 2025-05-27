@@ -6,16 +6,17 @@ import {
     TFetchBlogs,
     TStructuredBlogs,
 } from "@/types/api/blog";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 export const BlogsDataTransfer = ({
     blogs,
     params,
 }: {
     blogs: TFetchBlogs;
-    params: { [key: string]: string | string[] | undefined };
+    params: ReadonlyURLSearchParams;
 }): TStructuredBlogs => {
-    const pageSize = Number(params.pageSize || pageSizes.blogs);
-    const currentPage = Number(params.page || 1);
+    const pageSize = Number(params.get("pageSize") || pageSizes.blogs);
+    const currentPage = Number(params.get("page") || 1);
 
     // adding  image and fake date to each blog
     const newBlogList = blogs.map((blog) => ({

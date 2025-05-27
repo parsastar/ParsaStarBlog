@@ -5,6 +5,7 @@ export const GetAllBlogs = async (): Promise<TFetchBlogs> => {
         const res = await fetch(`${apiUrl}/posts`, {
             next: { revalidate: 60 },
         });
+        console.log("Fetching blogs");
         if (!res.ok) throw new Error("Network error");
         return await res.json();
     } catch (error) {
@@ -22,6 +23,8 @@ export const GetBlog = async ({
         const res = await fetch(`${apiUrl}/posts/${blogId}`, {
             next: { revalidate: 60 },
         });
+        console.log("Fetching blog", blogId);
+
         if (!res.ok) throw new Error("Network error");
         return await res.json();
     } catch (error) {
