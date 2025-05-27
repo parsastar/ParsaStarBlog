@@ -4,7 +4,6 @@ import BackButton from "@/components/backButton";
 import { SingleBlogTransfer } from "@/utils/blog";
 import { Metadata } from "next";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import React from "react";
 
 export async function generateStaticParams() {
@@ -33,16 +32,8 @@ export async function generateMetadata({
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
-    let rawBlog;
-    try {
-        rawBlog = await GetBlog({ blogId: id });
-    } catch (error: any) {
-        if (error.message === "NOT_FOUND") {
-            notFound(); // ✅ Only call notFound() here
-        } else {
-            return <p>there was and error </p>;
-        }
-    }
+    const rawBlog = await GetBlog({ blogId: id });
+
     const blog = SingleBlogTransfer({ blog: rawBlog });
 
     return (
@@ -70,7 +61,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                                 {blog.title}
                             </h1>
                         </div>
-                        {Date.now()}
+
                         <AnimatedLine />
 
                         <div className="bg-secondary-500 px-2 py-5 flex-grow overflow-y-auto">

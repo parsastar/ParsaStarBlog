@@ -10,13 +10,7 @@ const Footer = () => {
         target: containerRef,
         offset: ["start end", "end start"],
     });
-    useEffect(() => {
-        const unsubscribe = scrollYProgress.on("change", (latest) => {
-            console.log("scrollYProgress:", latest);
-        });
-
-        return () => unsubscribe(); // Clean up listener
-    }, [scrollYProgress]);
+    
     return (
         <footer
             ref={containerRef}
