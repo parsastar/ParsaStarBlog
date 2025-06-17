@@ -1,4 +1,4 @@
-import AnimatedLine from "@/components/animatedLine";
+import AnimatedLine from "@/components/common/animatedLine";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 

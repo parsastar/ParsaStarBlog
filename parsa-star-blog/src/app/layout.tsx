@@ -5,9 +5,9 @@ import localFont from "next/font/local";
 
 import { Roboto, Roboto_Mono } from "next/font/google";
 import { domAnimation, LazyMotion } from "motion/react";
-import { LenisWrapper } from "@/lenisWrapper";
-import Background from "@/components/background";
-import Header from "@/components/header";
+import { LenisWrapper } from "@/app/lenisWrapper";
+import Background from "@/components/common/background";
+import Header from "@/components/common/header";
 import Footer from "@/components/footer/footer";
 
 const roboto = Roboto({

@@ -1,5 +1,5 @@
 "use client";
-import { AnimatedText } from "@/components/AnimatedText";
+import { AnimatedText } from "@/components/common/AnimatedText";
 import { SiteInfo } from "@/constant/general";
 import { useAnimation, useInView } from "motion/react";
 import React, { useEffect, useRef } from "react";

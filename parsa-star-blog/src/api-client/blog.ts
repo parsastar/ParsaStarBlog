@@ -1,4 +1,3 @@
-"use server";
 import { TFetchBlog, TFetchBlogs } from "@/types/api/blog";
 import { notFound } from "next/navigation";
 

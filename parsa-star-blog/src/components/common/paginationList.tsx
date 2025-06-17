@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/pagination";
 import { ArrowRight } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Skeleton } from "./ui/skeleton";
-import { Button } from "./ui/button";
+import { Skeleton } from "../ui/skeleton";
+import { Button } from "../ui/button";
 
 export function PaginationList({
     currentPage,
@@ -68,7 +68,7 @@ export function PaginationList({
     };
 
     return (
-        <Pagination dir="ltr" >
+        <Pagination dir="ltr">
             <PaginationContent className="w-full px-5  justify-center">
                 <PaginationItem>
                     <Button

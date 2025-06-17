@@ -1,6 +1,6 @@
-import { GetAllBlogs, GetBlog } from "@/api/blog";
-import AnimatedLine from "@/components/animatedLine";
-import BackButton from "@/components/backButton";
+import { GetAllBlogs, GetBlog } from "@/api-client/blog";
+import AnimatedLine from "@/components/common/animatedLine";
+import BackButton from "@/components/common/backButton";
 import { SingleBlogTransfer } from "@/utils/blog";
 import { Metadata } from "next";
 import Image from "next/image";

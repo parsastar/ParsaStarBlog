@@ -1,8 +1,8 @@
-import BlogList from "@/features/blogs/blogList";
+import BlogList from "@/components/blogs/blogList";
 import { BlogsDataTransfer } from "@/utils/blog";
-import { PaginationList } from "@/components/paginationList";
-import BlogHeader from "@/features/blogs/blogHeader";
-import { GetAllBlogs } from "@/api/blog";
+import { PaginationList } from "@/components/common/paginationList";
+import BlogHeader from "@/components/blogs/blogHeader";
+import { GetAllBlogs } from "@/api-client/blog";
 
 // assuming you have this
 
