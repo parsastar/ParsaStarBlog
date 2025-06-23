@@ -4,9 +4,9 @@ import * as t from "drizzle-orm/pg-core";
 import { blogT } from "./blogs/blog";
 import { blogLikesT } from "./blogs/blogLikes";
 import { BlogCommentsT } from "./blogs/blogComments";
+import { userRolesArray, userSocials } from "@/types/user/shared";
 
-type Socials = { instagram?: string; linkedin?: string; twitter?: string };
-export const userRoles = t.pgEnum("role", ["admin", "author", "user"]);
+export const userRoles = t.pgEnum("role", userRolesArray);
 
 export const userT = t.pgTable(
     "users",
@@ -20,7 +20,7 @@ export const userT = t.pgTable(
         salt: t.varchar({ length: 100 }).notNull(),
         about: t.text(),
         phoneNumber: t.varchar({ length: 30 }),
-        socials: t.json().$type<Socials>(),
+        socials: t.json().$type<userSocials>(),
         website: t.varchar({ length: 400 }),
         ...defaultTimeStamps,
     },

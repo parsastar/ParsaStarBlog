@@ -1,4 +1,5 @@
-import Auth from "@/components/auth/auth";
+import Auth from "@/components/auth/signup";
+
 import React from "react";
 
 const Page = () => {
