@@ -3,8 +3,9 @@ import Link from "next/link";
 import React from "react";
 import { ArrowRight } from "lucide-react";
 
-import { TBlog, TBlogs } from "@/types/api/blog";
+
 import AnimatedLine from "@/components/common/animatedLine";
+import { TBlog, TBlogs } from "@/types/blogs/api";
 
 const BlogList = ({ blogs }: { blogs: TBlogs }) => {
     const MappedBlogs: TBlogs[] = [];
