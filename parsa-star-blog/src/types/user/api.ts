@@ -1,19 +1,13 @@
 import { TMultiPages, TServerResponse } from "@/types/shared";
-import { TUserRoles, userSocials } from "./shared";
+import { z } from "zod";
+import { userServerSchema } from "./schemas/serverSchema";
+
+
+
+const { profile, auth, admin } = userServerSchema; // we use server zod validators to create the payload type of user actions 
 
 // actual user type that we use for the client
-export type TUser = {
-    id: number;
-    firstName: string;
-    lastName: string;
-    role: TUserRoles;
-    email: string;
-    about?: string;
-    socials?: userSocials;
-    phoneNumber?: string;
-    website?: string;
-    password: string;
-};
+export type TUser = z.infer<typeof admin.update>;
 // server responses types
 export type TGetUser = TServerResponse & {
     user: Omit<TUser, "password">;
@@ -26,6 +20,7 @@ export type TPostUserResponse = TServerResponse & {
 };
 
 // request payloads for post
-export type TCreateUserPayload = Omit<TUser, "id">;
-export type TPutUserPayload = Omit<TUser, "id" | "password">;
-export type TChangeUserPasswordPayload = TUser["password"];
+export type TCreateUserPayload = z.infer<typeof auth.signUp>;
+export type TEditUserPayload = z.infer<typeof admin.update>;
+export type TUserProfilePayload = z.infer<typeof profile.profile>;
+export type TChangeUserPasswordPayload = z.infer<typeof profile.changePassword>;

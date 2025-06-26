@@ -12,8 +12,9 @@ const createUserSchema = createSelectSchema(userT);
 const insertUserSchema = createInsertSchema(userT, {});
 const updateUserSchema = createUpdateSchema(userT);
 
-export const userSchemas = async () => ({
+export const userDBSchemas = async () => ({
     create: createUserSchema,
     insert: insertUserSchema,
     updateUserSchema,
 });
+

@@ -15,6 +15,13 @@
       "when": 1750148649082,
       "tag": "0001_lazy_jane_foster",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1750888112309,
+      "tag": "0002_premium_amazoness",
+      "breakpoints": true
     }
   ]
 }

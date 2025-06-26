@@ -1,32 +1,15 @@
 import { z } from "zod";
+import { SharedUserSchema } from "../shared";
 
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
-
-const nameFields = {
-    firstName: z.string().min(3, "First name must be at least 3 characters"),
-    lastName: z.string().min(3, "Last name must be at least 3 characters"),
-};
-
-const emailField = {
-    email: z.string().email("Invalid email").min(1, "Email is required"),
-};
-
-const phoneField = {
-    phoneNumber: z
-        .string()
-        .regex(phoneRegex, "Insert a valid phone number")
-        .optional(),
-};
-
-const passwordField = {
-    password: z
-        .string()
-        .regex(
-            passwordRegex,
-            "Password must contain lower and upper case letters and numbers"
-        ),
-};
+const {
+    emailField,
+    nameFields,
+    passwordField,
+    passwordRegex,
+    phoneField,
+    infoField,
+    userBase,
+} = SharedUserSchema;
 
 const signUpBase = {
     ...nameFields,
@@ -55,16 +38,7 @@ const logIn = z.object({
 const profile = z.object({
     ...nameFields,
     ...phoneField,
-    ...emailField,
-    about: z.string().optional(),
-    socials: z
-        .object({
-            instagram: z.string().optional(),
-            linkedin: z.string().optional(),
-            twitter: z.string().optional(),
-        })
-        .optional(),
-    website: z.string().optional(),
+    ...infoField,
 });
 
 // 🔁 Change password schema
@@ -103,19 +77,7 @@ const changePassword = z
 
 // 🛠 Update user schema — safely omit repeatPassword
 const UpDateUserSchema = z.object({
-    ...nameFields,
-    ...phoneField,
-    ...emailField,
-    ...passwordField,
-    about: z.string().optional(),
-    socials: z
-        .object({
-            instagram: z.string().optional(),
-            linkedin: z.string().optional(),
-            twitter: z.string().optional(),
-        })
-        .optional(),
-    website: z.string().optional(),
+    ...userBase,
 });
 
 // 🔡 Type definitions

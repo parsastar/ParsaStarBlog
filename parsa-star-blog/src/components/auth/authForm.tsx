@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { TSignUpSchema, userFormSchema } from "@/types/user/formSchema";
+import { TSignUpSchema, userFormSchema } from "@/types/user/schemas/formSchema";
 import { LabelWrapper } from "../common/inputs/labelWrapper";
 import { StyledInput } from "../common/inputs/styledInput";
 import { Button } from "../ui/button";
