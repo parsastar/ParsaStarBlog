@@ -7,6 +7,7 @@ import { generateSalt, hashPassword } from "@/server/lib/passwordHasher";
 import { TCreateUserPayload } from "@/types/user/api";
 import { userServerSchema } from "@/types/user/schemas/serverSchema";
 import { eq, InferInsertModel } from "drizzle-orm";
+import { createSession } from "./session";
 
 type TNewUser = InferInsertModel<typeof userT>;
 
@@ -51,9 +52,8 @@ export const signUpAction = async (payload: TCreateUserPayload) => {
         const insertedUser = await db
             .insert(userT)
             .values(newUser)
-            .returning({ user_id: userT.id, role: userT.role });
-
-        console.log("insertedUser : ", insertedUser);
+            .returning({ user_id: userT.id, role: userT.role })
+            .then((data) => data[0]);
 
         if (!insertedUser) {
             return {
@@ -62,6 +62,10 @@ export const signUpAction = async (payload: TCreateUserPayload) => {
             };
         }
 
+        await createSession({
+            role: insertedUser.role,
+            userId: String(insertedUser.user_id),
+        });
         return {
             status: StatusCodes.success,
             user: insertedUser,

@@ -9,6 +9,11 @@ import { LenisWrapper } from "@/app/lenisWrapper";
 import Background from "@/components/common/background";
 import Header from "@/components/common/header";
 import Footer from "@/components/footer/footer";
+import dynamic from "next/dynamic";
+
+const Toaster = dynamic(() => import("@/components/ui/sonner"), {
+    loading: () => null,
+});
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -52,6 +57,7 @@ export default function RootLayout({
                     <Background />
                     <Footer />
                 </LazyMotion>
+                <Toaster richColors position="top-right" />
             </body>
         </html>
     );

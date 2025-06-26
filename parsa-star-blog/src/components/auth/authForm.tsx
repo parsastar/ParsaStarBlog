@@ -8,6 +8,9 @@ import { StyledInput } from "../common/inputs/styledInput";
 import { Button } from "../ui/button";
 import { m } from "motion/react";
 import { signUpAction } from "@/server/actions/user/signup";
+import StatusCodes from "@/server/lib/constants";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 const AuthForm = () => {
     const methods = useForm<TSignUpSchema>({
@@ -16,13 +19,20 @@ const AuthForm = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = methods;
     const onSubmit: SubmitHandler<TSignUpSchema> = async (data) => {
         const { repeatPassword: _repeatPassword, ...otherFields } = data;
-        const _result = await signUpAction(otherFields);
+        try {
+            const result = await signUpAction(otherFields);
+            if (result.status !== StatusCodes.success) {
+                return toast.error(result.message);
+            }
+            toast.success(result.message);
+        } catch (error) {
+            toast.error("something went wrong try again later");
+        }
     };
-    console.log(errors);
 
     return (
         <form
@@ -90,9 +100,19 @@ const AuthForm = () => {
                 }}
                 className="w-full"
             >
-                <Button className="font-roboto_mono w-full font-normal mt-5 !text-lg text-white bg-primary-900 hover:bg-primary-800 !p-8">
+                <Button
+                    disabled={isSubmitting}
+                    className="font-roboto_mono w-full font-normal mt-5 !text-lg text-white bg-primary-900 hover:bg-primary-800 !p-8"
+                >
                     {" "}
-                    Sing Up{" "}
+                    {isSubmitting ? (
+                        <>
+                            Singing Up
+                            <Loader2 className="animate-spin" />
+                        </>
+                    ) : (
+                        "Sing Up"
+                    )}
                 </Button>
             </m.div>
         </form>

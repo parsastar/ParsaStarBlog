@@ -12,7 +12,7 @@ export const userT = t.pgTable(
     "users",
     {
         id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
-        role: userRoles().default("user"),
+        role: userRoles().default("user").notNull(),
         password: t.varchar({ length: 500 }).notNull(),
         first_name: t.varchar({ length: 200 }).notNull(),
         image: t.varchar({ length: 1000 }),
