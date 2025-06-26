@@ -19,11 +19,10 @@ const AuthForm = () => {
         formState: { errors },
     } = methods;
     const onSubmit: SubmitHandler<TSignUpSchema> = async (data) => {
-        const { repeatPassword, ...otherFields } = data;
-        const result = await signUpAction(otherFields);
-        console.log("result : " , result)
+        const { repeatPassword: _repeatPassword, ...otherFields } = data;
+        const _result = await signUpAction(otherFields);
     };
-    console.log(errors)
+    console.log(errors);
 
     return (
         <form

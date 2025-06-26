@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { userT } from "@/db/schema";
 import StatusCodes from "@/server/lib/constants";
 import { generateSalt, hashPassword } from "@/server/lib/passwordHasher";
-import { TCreateUserPayload, TPostUserResponse } from "@/types/user/api";
+import { TCreateUserPayload } from "@/types/user/api";
 import { userServerSchema } from "@/types/user/schemas/serverSchema";
 import { eq, InferInsertModel } from "drizzle-orm";
 
@@ -42,6 +42,7 @@ export const signUpAction = async (payload: TCreateUserPayload) => {
         const newUser: TNewUser = {
             first_name: firstName,
             last_name: lastName,
+            phone_number: phoneNumber,
             email,
             password: hashedPass,
             salt,

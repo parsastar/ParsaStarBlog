@@ -56,7 +56,7 @@ export const LabelWrapper = ({
                 />
             </div>
             {error && (
-                <p className="text-sm text-red-500 font-normal">{error}</p>
+                <p className={`text-sm text-red-500 font-normal ${errorClass}`}>{error}</p>
             )}
         </div>
     );
