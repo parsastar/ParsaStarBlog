@@ -1,6 +1,6 @@
 {
-  "id": "76cbd90e-2d78-4440-820d-805fe900ff73",
-  "prevId": "d68df557-8079-4ecc-b224-4437c5354cdd",
+  "id": "b744f270-6301-431e-bc1c-b8027354fd8d",
+  "prevId": "006b29ad-ccba-4344-ba46-59095d05effc",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -31,20 +31,20 @@
           "primaryKey": false,
           "notNull": true
         },
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "blogId": {
-          "name": "blogId",
+        "blog_id": {
+          "name": "blog_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "replyToId": {
-          "name": "replyToId",
+        "reply_to_id": {
+          "name": "reply_to_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -66,12 +66,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "blog_comments_userId_users_id_fk": {
-          "name": "blog_comments_userId_users_id_fk",
+        "blog_comments_user_id_users_id_fk": {
+          "name": "blog_comments_user_id_users_id_fk",
           "tableFrom": "blog_comments",
           "tableTo": "users",
           "columnsFrom": [
-            "userId"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -79,12 +79,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "blog_comments_blogId_blogs_id_fk": {
-          "name": "blog_comments_blogId_blogs_id_fk",
+        "blog_comments_blog_id_blogs_id_fk": {
+          "name": "blog_comments_blog_id_blogs_id_fk",
           "tableFrom": "blog_comments",
           "tableTo": "blogs",
           "columnsFrom": [
-            "blogId"
+            "blog_id"
           ],
           "columnsTo": [
             "id"
@@ -92,12 +92,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "blog_comments_replyToId_blog_comments_id_fk": {
-          "name": "blog_comments_replyToId_blog_comments_id_fk",
+        "blog_comments_reply_to_id_blog_comments_id_fk": {
+          "name": "blog_comments_reply_to_id_blog_comments_id_fk",
           "tableFrom": "blog_comments",
           "tableTo": "blog_comments",
           "columnsFrom": [
-            "replyToId"
+            "reply_to_id"
           ],
           "columnsTo": [
             "id"
@@ -116,14 +116,14 @@
       "name": "blog_likes",
       "schema": "",
       "columns": {
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "blogId": {
-          "name": "blogId",
+        "blog_id": {
+          "name": "blog_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -145,12 +145,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "blog_likes_userId_users_id_fk": {
-          "name": "blog_likes_userId_users_id_fk",
+        "blog_likes_user_id_users_id_fk": {
+          "name": "blog_likes_user_id_users_id_fk",
           "tableFrom": "blog_likes",
           "tableTo": "users",
           "columnsFrom": [
-            "userId"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -158,12 +158,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "blog_likes_blogId_blogs_id_fk": {
-          "name": "blog_likes_blogId_blogs_id_fk",
+        "blog_likes_blog_id_blogs_id_fk": {
+          "name": "blog_likes_blog_id_blogs_id_fk",
           "tableFrom": "blog_likes",
           "tableTo": "blogs",
           "columnsFrom": [
-            "blogId"
+            "blog_id"
           ],
           "columnsTo": [
             "id"
@@ -173,11 +173,11 @@
         }
       },
       "compositePrimaryKeys": {
-        "blog_likes_blogId_userId_pk": {
-          "name": "blog_likes_blogId_userId_pk",
+        "blog_likes_blog_id_user_id_pk": {
+          "name": "blog_likes_blog_id_user_id_pk",
           "columns": [
-            "blogId",
-            "userId"
+            "blog_id",
+            "user_id"
           ]
         }
       },
@@ -225,14 +225,14 @@
           "primaryKey": false,
           "notNull": true
         },
-        "userid": {
-          "name": "userid",
+        "user_id": {
+          "name": "user_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "subSections": {
-          "name": "subSections",
+        "sub_sections": {
+          "name": "sub_sections",
           "type": "json",
           "primaryKey": false,
           "notNull": false
@@ -254,12 +254,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "blogs_userid_users_id_fk": {
-          "name": "blogs_userid_users_id_fk",
+        "blogs_user_id_users_id_fk": {
+          "name": "blogs_user_id_users_id_fk",
           "tableFrom": "blogs",
           "tableTo": "users",
           "columnsFrom": [
-            "userid"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -305,18 +305,24 @@
         },
         "password": {
           "name": "password",
-          "type": "varchar(20)",
+          "type": "varchar(500)",
           "primaryKey": false,
           "notNull": true
         },
-        "firstName": {
-          "name": "firstName",
+        "first_name": {
+          "name": "first_name",
           "type": "varchar(200)",
           "primaryKey": false,
           "notNull": true
         },
-        "lastName": {
-          "name": "lastName",
+        "image": {
+          "name": "image",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_name": {
+          "name": "last_name",
           "type": "varchar(200)",
           "primaryKey": false,
           "notNull": true
@@ -339,8 +345,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "phoneNumber": {
-          "name": "phoneNumber",
+        "phone_number": {
+          "name": "phone_number",
           "type": "varchar(30)",
           "primaryKey": false,
           "notNull": false
@@ -402,9 +408,9 @@
       "name": "role",
       "schema": "public",
       "values": [
-        "admin",
+        "user",
         "author",
-        "user"
+        "admin"
       ]
     }
   },

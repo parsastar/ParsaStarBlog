@@ -7,6 +7,7 @@ import { LabelWrapper } from "../common/inputs/labelWrapper";
 import { StyledInput } from "../common/inputs/styledInput";
 import { Button } from "../ui/button";
 import { m } from "motion/react";
+import { signUpAction } from "@/server/actions/user/signup";
 
 const AuthForm = () => {
     const methods = useForm<TSignUpSchema>({
@@ -17,7 +18,12 @@ const AuthForm = () => {
         handleSubmit,
         formState: { errors },
     } = methods;
-    const onSubmit: SubmitHandler<TSignUpSchema> = async (data) => {};
+    const onSubmit: SubmitHandler<TSignUpSchema> = async (data) => {
+        const { repeatPassword, ...otherFields } = data;
+        const result = await signUpAction(otherFields);
+        console.log("result : " , result)
+    };
+    console.log(errors)
 
     return (
         <form
@@ -35,9 +41,9 @@ const AuthForm = () => {
                 <LabelWrapper
                     index={1}
                     label="Last name"
-                    error={errors.firstName?.message?.toString()}
+                    error={errors.lastName?.message?.toString()}
                 >
-                    <StyledInput {...register("firstName")} />
+                    <StyledInput {...register("lastName")} />
                 </LabelWrapper>
             </div>
             <LabelWrapper
@@ -47,16 +53,23 @@ const AuthForm = () => {
             >
                 <StyledInput {...register("phoneNumber")} />
             </LabelWrapper>
+            <LabelWrapper
+                index={3}
+                label="Email"
+                error={errors.email?.message?.toString()}
+            >
+                <StyledInput {...register("email")} />
+            </LabelWrapper>
             <div className="flex items-start gap-4 w-full">
                 <LabelWrapper
-                    index={3}
+                    index={4}
                     label="Password"
                     error={errors.password?.message?.toString()}
                 >
                     <StyledInput {...register("password")} />
                 </LabelWrapper>
                 <LabelWrapper
-                    index={4}
+                    index={5}
                     label="Repeat password"
                     error={errors.repeatPassword?.message?.toString()}
                 >
@@ -70,7 +83,7 @@ const AuthForm = () => {
                     opacity: 1,
                     transition: {
                         duration: 0.3,
-                        delay: 5 * 0.1,
+                        delay: 6 * 0.1,
                         type: "spring",
                         damping: 30,
                         stiffness: 100,

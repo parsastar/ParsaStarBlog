@@ -12,17 +12,17 @@ export const blogT = t.pgTable("blogs", {
     title: t.varchar({ length: 150 }).notNull(),
     cover: t.varchar({ length: 500 }),
     description: t.text().notNull(),
-    userid: t
+    user_id: t
         .integer()
         .notNull()
         .references(() => userT.id, { onDelete: "cascade" }),
-    subSections: t.json().$type<TSubSection[]>(),
+    sub_sections: t.json().$type<TSubSection[]>(),
     ...defaultTimeStamps,
 });
 
 /// Relations for blogs
 export const blogsTableRelations = relations(blogT, ({ many, one }) => ({
-    user: one(userT, { fields: [blogT.userid], references: [userT.id] }),
+    user: one(userT, { fields: [blogT.user_id], references: [userT.id] }),
     comments: many(BlogCommentsT),
     likes: many(blogLikesT),
 }));

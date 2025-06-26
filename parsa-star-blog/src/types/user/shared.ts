@@ -13,7 +13,7 @@ export type TUserSocials = {
 import { z } from "zod";
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+const phoneRegex = /^(?:\+98\s?|0)?9\d{9}$/;
 
 const nameFields = {
     firstName: z.string().min(3, "First name must be at least 3 characters"),
