@@ -1,4 +1,5 @@
-import { signUpAction } from "@/server/actions/user/signup";
+
+import { signUpAction } from "@/server/actions/user/auth";
 import { TCreateUserPayload } from "@/types/user/api";
 import { NextResponse } from "next/server";
 

@@ -15,8 +15,14 @@ const severError = (error: unknown) => ({
     message: "Server error",
     error,
 });
+
+const unAuthorized = () => ({
+    status: StatusCodes.unauthorized,
+    message: "unAuthorized , please sign in to your account ",
+});
 export const ShortResponses = {
+    unAuthorized,
     notFoundError,
     schemaError: severSchemaErrorResponse,
-    severError
+    severError,
 };

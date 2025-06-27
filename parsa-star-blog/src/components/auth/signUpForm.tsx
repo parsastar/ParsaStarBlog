@@ -7,10 +7,11 @@ import { LabelWrapper } from "../common/inputs/labelWrapper";
 import { StyledInput } from "../common/inputs/styledInput";
 import { Button } from "../ui/button";
 import { m } from "motion/react";
-import { signUpAction } from "@/server/actions/user/signup";
+
 import StatusCodes from "@/server/lib/constants";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { signUpAction } from "@/server/actions/user/auth";
 
 const SignUpForm = () => {
     const methods = useForm<TSignUpSchema>({

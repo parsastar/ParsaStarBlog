@@ -1,12 +1,13 @@
 "use server";
 import { redis } from "@/db/redis/redis";
-import StatusCodes from "@/server/lib/constants";
+
 import crypto from "crypto";
 import { userRolesArray } from "@/types/user/shared";
 import { z } from "zod";
-import { setSessionCookie } from "@/server/lib/cookies";
+import { RemoveSessionCookie, setSessionCookie } from "@/server/lib/cookies";
 import { session_expiration_date } from "@/server/constants";
 import { ShortResponses } from "@/server/lib/shortResponses";
+import StatusCodes from "@/server/lib/constants";
 
 const sessionSchema = z.object({
     role: z.enum(userRolesArray),
@@ -27,4 +28,29 @@ export const createSession = async (user: TUserSession) => {
         });
         await setSessionCookie(sessionId);
     } catch (error) {}
+};
+
+export const getSession = async (sessionId: string) => {
+    const session = (await redis.get(`session:${sessionId}`)) as
+        | TUserSession
+        | undefined;
+    if (!session) {
+        await RemoveSessionCookie();
+        return ShortResponses.unAuthorized();
+    }
+
+    return session;
+};
+
+export const RemoveSession = async (sessionId: string) => {
+    await RemoveSessionCookie();
+    try {
+        await redis.del(`session:${sessionId}`);
+        return {
+            message: "logged out successfully",
+            status: StatusCodes.success,
+        };
+    } catch (error) {
+        return ShortResponses.severError(error);
+    }
 };

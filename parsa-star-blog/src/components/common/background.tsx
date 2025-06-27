@@ -90,12 +90,11 @@ const GridLines: React.FC<GridLineProps> = ({
     return (
         <m.line
             strokeDasharray="2718 2718"
-            vectorEffect="non-scaling-stroke"
             strokeDashoffset={strokeDashoffset}
             x1={line}
             x2={line}
+            vectorEffect={"non-scaling-stroke"}
             y1="0"
-            className={"!shrink-0 !grow-0"}
             y2="2718"
             stroke="#A0A0A0"
             strokeWidth="1px"

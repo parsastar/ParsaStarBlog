@@ -11,3 +11,23 @@ export const setSessionCookie = async (sessionId: string) => {
         maxAge: session_expiration_date,
     });
 };
+
+export const getSessionCookie = async () => {
+    const cookieStore = await cookies();
+    return cookieStore.get(Cookie_Session_Key);
+};
+
+export const RemoveSessionCookie = async () => {
+    const cookieStore = await cookies();
+    return cookieStore.delete(Cookie_Session_Key);
+};
+
+export const getCookie = async (name: string) => {
+    const cookieStore = await cookies();
+    return cookieStore.get(name);
+};
+
+export const removeCookie = async (name: string) => {
+    const cookieStore = await cookies();
+    return cookieStore.delete(name);
+};

@@ -11,7 +11,8 @@ import { m } from "motion/react";
 import StatusCodes from "@/server/lib/constants";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-import { SignInAction } from "@/server/actions/user/singin";
+import { SignInAction } from "@/server/actions/user/auth";
+
 
 const SingInForm = () => {
     const methods = useForm<TSignInSchema>({
