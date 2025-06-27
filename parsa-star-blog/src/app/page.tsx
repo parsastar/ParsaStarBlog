@@ -11,16 +11,24 @@ export default function Home() {
                     {" "}
                     Hey There Welcome to my Blogs Website{" "}
                 </h1>
-                <Link
-                    href={"/blogs"}
-                    className="flex items-center justify-center text-red-500 hover:text-secondary-500 hover:bg-red-500 duration-200 p-3 px-5 sm:p-4 sm:px-7 lg:p-5 lg:px-10 font-roboto font-medium text-subtitle sm:text-xl  lg:text-blogTitle hover:gap-5     rounded-sm border border-red-500 gap-2 "
-                >
-                    {" "}
-                    Go to Blogs{" "}
-                    <ArrowRight className="!size:20px lg:!size-[30px]" />{" "}
-                </Link>
+                <div className="flex gap-10 items-center w-full my-10 bg-secondary-500 justify-center ">
+                    <StyledLink label="Blogs" href="/blogs" />
+                    <StyledLink label="Sign up" href="/signup" />
+                    <StyledLink label="Sign in" href="/signin" />
+                </div>
                 <AnimatedLine />
+
             </div>
         </div>
     );
 }
+
+const StyledLink = ({ href, label }: { href: string; label: string }) => (
+    <Link
+        href={`${href}`}
+        className="flex items-center justify-center text-red-500 hover:text-secondary-500 hover:bg-red-500 duration-200 p-3 px-5 sm:p-4 sm:px-7 lg:p-5 lg:px-10 font-roboto font-medium text-subtitle sm:text-xl  lg:text-blogTitle hover:gap-5     rounded-sm border border-red-500 gap-2 "
+    >
+        {" "}
+        {label} <ArrowRight className="!size:20px lg:!size-[30px]" />{" "}
+    </Link>
+);

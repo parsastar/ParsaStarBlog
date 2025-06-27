@@ -23,6 +23,7 @@ export type TPostUserResponse = TServerResponse & {
 
 // request payloads for post
 export type TCreateUserPayload = z.infer<typeof _auth.signUp>;
+export type TSignInPayload = z.infer<typeof _auth.logIn>
 export type TEditUserPayload = z.infer<typeof _admin.update>;
 export type TUserProfilePayload = z.infer<typeof _profile.profile>;
 export type TChangeUserPasswordPayload = z.infer<typeof _profile.changePassword>;

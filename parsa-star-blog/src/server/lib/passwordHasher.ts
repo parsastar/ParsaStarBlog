@@ -9,3 +9,19 @@ export const hashPassword = (password: string, salt: string): Promise<string> =>
 
 export const generateSalt = async () =>
     crypto.randomBytes(16).toString("hex").normalize();
+
+export const comparePassword = async ({
+    password,
+    hashedPassword,
+    salt,
+}: {
+    password: string;
+    salt: string;
+    hashedPassword: string;
+}): Promise<boolean> => {
+    const hashedGivenPass = await hashPassword(password, salt);
+    return crypto.timingSafeEqual(
+        Buffer.from(hashedGivenPass, "hex"),
+        Buffer.from(hashedPassword, "hex")
+    );
+};

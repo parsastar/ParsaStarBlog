@@ -8,6 +8,7 @@ import { TCreateUserPayload } from "@/types/user/api";
 import { userServerSchema } from "@/types/user/schemas/serverSchema";
 import { eq, InferInsertModel } from "drizzle-orm";
 import { createSession } from "./session";
+import { ShortResponses } from "@/server/lib/shortResponses";
 
 type TNewUser = InferInsertModel<typeof userT>;
 
@@ -16,11 +17,7 @@ export const signUpAction = async (payload: TCreateUserPayload) => {
         userServerSchema.auth.signUp.safeParse(payload);
 
     if (!success) {
-        return {
-            status: StatusCodes.badRequest,
-            message: "Invalid data",
-            errors: error.errors, // You can send specific errors if needed
-        };
+        return ShortResponses.schemaError(error);
     }
 
     const { email, firstName, lastName, password, phoneNumber } = data;
@@ -72,10 +69,6 @@ export const signUpAction = async (payload: TCreateUserPayload) => {
             message: "User created successfully",
         };
     } catch (error) {
-        return {
-            status: StatusCodes.internalServerError,
-            message: "Server error",
-            error,
-        };
+        return ShortResponses.severError(error);
     }
 };

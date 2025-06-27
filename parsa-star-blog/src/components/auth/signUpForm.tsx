@@ -12,7 +12,7 @@ import StatusCodes from "@/server/lib/constants";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
-const AuthForm = () => {
+const SignUpForm = () => {
     const methods = useForm<TSignUpSchema>({
         resolver: zodResolver(userFormSchema.auth.signUp),
     });
@@ -36,7 +36,7 @@ const AuthForm = () => {
 
     return (
         <form
-            className="my-5 mx-2 flex flex-col gap-6"
+            className="my-5 mx-2 lg:px-0 px-5 gap-10 flex flex-col lg:gap-6"
             onSubmit={handleSubmit(onSubmit)}
         >
             <div className="flex w-full items-start gap-4">
@@ -45,14 +45,20 @@ const AuthForm = () => {
                     label="First name"
                     error={errors.firstName?.message?.toString()}
                 >
-                    <StyledInput {...register("firstName")} />
+                    <StyledInput
+                        placeholder="Your firstName "
+                        {...register("firstName")}
+                    />
                 </LabelWrapper>
                 <LabelWrapper
                     index={1}
                     label="Last name"
                     error={errors.lastName?.message?.toString()}
                 >
-                    <StyledInput {...register("lastName")} />
+                    <StyledInput
+                        placeholder="your lastName"
+                        {...register("lastName")}
+                    />
                 </LabelWrapper>
             </div>
             <LabelWrapper
@@ -60,14 +66,17 @@ const AuthForm = () => {
                 label="Phone number"
                 error={errors.phoneNumber?.message?.toString()}
             >
-                <StyledInput {...register("phoneNumber")} />
+                <StyledInput
+                    placeholder="0*********"
+                    {...register("phoneNumber")}
+                />
             </LabelWrapper>
             <LabelWrapper
                 index={3}
                 label="Email"
                 error={errors.email?.message?.toString()}
             >
-                <StyledInput {...register("email")} />
+                <StyledInput placeholder="your_email@gmail.com" {...register("email")} />
             </LabelWrapper>
             <div className="flex items-start gap-4 w-full">
                 <LabelWrapper
@@ -75,14 +84,14 @@ const AuthForm = () => {
                     label="Password"
                     error={errors.password?.message?.toString()}
                 >
-                    <StyledInput {...register("password")} />
+                    <StyledInput placeholder={"Your_password"} {...register("password")} />
                 </LabelWrapper>
                 <LabelWrapper
                     index={5}
                     label="Repeat password"
                     error={errors.repeatPassword?.message?.toString()}
                 >
-                    <StyledInput {...register("repeatPassword")} />
+                    <StyledInput placeholder="Repeat_password" {...register("repeatPassword")} />
                 </LabelWrapper>
             </div>
             <m.div
@@ -119,4 +128,4 @@ const AuthForm = () => {
     );
 };
 
-export default AuthForm;
+export default SignUpForm;

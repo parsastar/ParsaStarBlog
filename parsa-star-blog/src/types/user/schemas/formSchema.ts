@@ -82,7 +82,7 @@ const UpDateUserSchema = z.object({
 
 // 🔡 Type definitions
 export type TSignUpSchema = z.infer<typeof signUp>;
-export type TLogInSchema = z.infer<typeof logIn>;
+export type TSignInSchema = z.infer<typeof logIn>;
 export type TProfileSchema = z.infer<typeof profile>;
 export type TChangePasswordSchema = z.infer<typeof changePassword>;
 export type TUpdateUserSchema = z.infer<typeof UpDateUserSchema>;
