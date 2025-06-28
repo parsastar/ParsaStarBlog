@@ -27,7 +27,9 @@ export const createSession = async (user: TUserSession) => {
             ex: session_expiration_date,
         });
         await setSessionCookie(sessionId);
-    } catch (error) {}
+    } catch (error) {
+        return ShortResponses.severError(error)
+    }
 };
 
 export const getSession = async (sessionId: string) => {

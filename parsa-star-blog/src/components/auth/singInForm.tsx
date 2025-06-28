@@ -32,7 +32,7 @@ const SingInForm = () => {
             }
             toast.success(result.message);
             router.push("/dashboard");
-        } catch (error) {
+        } catch {
             toast.error("something went wrong try again later");
         }
     };

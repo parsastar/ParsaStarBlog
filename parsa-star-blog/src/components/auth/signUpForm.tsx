@@ -12,10 +12,10 @@ import StatusCodes from "@/server/lib/constants";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { signUpAction } from "@/server/actions/user/auth";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
-    const router = useRouter()
+    const router = useRouter();
     const methods = useForm<TSignUpSchema>({
         resolver: zodResolver(userFormSchema.auth.signUp),
     });
@@ -33,8 +33,7 @@ const SignUpForm = () => {
             }
             toast.success(result.message);
             router.push("/dashboard");
-
-        } catch (error) {
+        } catch {
             toast.error("something went wrong try again later");
         }
     };
