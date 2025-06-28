@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 
 const Header = () => {
     const pathname = usePathname();
+    if (pathname.startsWith("/dashboard")) return <></>;
     return (
         <header className="w-screen sticky  z-[100] left-0 top-0 flex bg-secondary-500 justify-center border-b border-[#A0A0A0]">
             <div className="w-full relative flex  items-center container  py-3 sm:p-3 px-2 sm:px-5">

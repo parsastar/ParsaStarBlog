@@ -20,6 +20,7 @@ const Background = () => {
     );
     const linesPositions = [0, 300, 600, 900, 1200];
     const pathname = usePathname();
+
     useEffect(() => {
         const updateHeight = () => {
             const windowHeight = document.body.offsetHeight;
@@ -41,6 +42,7 @@ const Background = () => {
 
         updateHeight(); // Set initial height
     }, [pathname]);
+    if (pathname.startsWith("/dashboard")) return <></>;
 
     return (
         <div

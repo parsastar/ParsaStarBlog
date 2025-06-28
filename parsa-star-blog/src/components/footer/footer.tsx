@@ -1,16 +1,19 @@
 "use client";
-import React, {  useRef } from "react";
+import React, { useRef } from "react";
 import FooterContent from "./footerCotent";
 import FooterTitle from "./footerTitle";
 import { useScroll } from "motion/react";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+    const pathname = usePathname();
     const containerRef = useRef<HTMLElement | null>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end start"],
     });
-    
+    if (pathname.startsWith("/dashboard")) return <></>;
+
     return (
         <footer
             ref={containerRef}
