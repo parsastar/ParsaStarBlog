@@ -1,6 +1,7 @@
+"use server";
 import { redis } from "@/db/redis/redis";
 import StatusCodes from "@/server/lib/constants";
-import { getSessionCookie, RemoveSessionCookie } from "@/server/lib/cookies";
+import { getSessionCookie } from "@/server/lib/cookies";
 import { ShortResponses } from "@/server/lib/shortResponses";
 import { userRolesArray } from "@/types/user/shared";
 import { cache } from "react";
@@ -11,29 +12,30 @@ const sessionSchema = z.object({
 });
 
 type TUserSession = z.infer<typeof sessionSchema>;
-export const getSessionOnEdge = async (sessionId: string) => {
-    const session: TUserSession | undefined | null = await redis.get(
-        `session:${sessionId}`
-    );
-
-    if (!session) {
-        await RemoveSessionCookie();
+export const getSessionOnEdge = cache(async (sessionId: string) => {
+    const rawSession = await redis.get(`session:${sessionId}`);
+    const { success, data } = sessionSchema.safeParse(rawSession);
+    if (!success) {
         return ShortResponses.unAuthorized();
     }
-
     return {
+        message: "session found successfully",
         status: StatusCodes.success,
-        session,
+        session: data,
     };
-};
+});
 
-export const getCurrentUser = cache(async () => {
+export const getCurrentUser = async (): Promise<{
+    message: string;
+    status: number;
+    session?: TUserSession;
+}> => {
     try {
         const sessionId = await getSessionCookie();
-        if (!sessionId || !sessionId.value) return ShortResponses.unAuthorized();
+        if (!sessionId?.value) return ShortResponses.unAuthorized();
         const session = await getSessionOnEdge(sessionId.value);
         return session;
     } catch (error) {
         return ShortResponses.severError(error);
     }
-});
+};

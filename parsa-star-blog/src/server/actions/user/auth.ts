@@ -117,10 +117,11 @@ export const SignInAction = async (payload: TSignInPayload) => {
 export const logOutAction = async () => {
     try {
         const sessionId = await getSessionCookie();
-        if (!sessionId || !sessionId.value) {
+        if (!sessionId?.value) {
             return ShortResponses.unAuthorized();
         }
         const logout = await RemoveSession(sessionId.value);
+        
         return logout;
     } catch (error) {
         return ShortResponses.severError(error);
