@@ -7,15 +7,15 @@ import { blogT } from "./blog";
 export const BlogCommentsT = t.pgTable("blog_comments", {
     id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
     content: t.text().notNull(),
-    userId: t
+    user_id: t
         .integer()
         .notNull()
         .references(() => userT.id, { onDelete: "cascade" }),
-    blogId: t
+    blog_id: t
         .integer()
         .notNull()
         .references(() => blogT.id, { onDelete: "cascade" }),
-    replyToId: t.integer().references((): t.AnyPgColumn => BlogCommentsT.id, {
+    reply_to_id: t.integer().references((): t.AnyPgColumn => BlogCommentsT.id, {
         onDelete: "cascade",
     }), // self-referencing FK
     ...defaultTimeStamps,
@@ -25,15 +25,15 @@ export const BlogCommentsTableRelations = relations(
     BlogCommentsT,
     ({ many, one }) => ({
         blog: one(blogT, {
-            fields: [BlogCommentsT.blogId],
+            fields: [BlogCommentsT.blog_id],
             references: [blogT.id],
         }),
         user: one(userT, {
-            fields: [BlogCommentsT.userId],
+            fields: [BlogCommentsT.user_id],
             references: [userT.id],
         }),
         parent: one(BlogCommentsT, {
-            fields: [BlogCommentsT.replyToId],
+            fields: [BlogCommentsT.reply_to_id],
             references: [BlogCommentsT.id],
         }),
         replies: many(BlogCommentsT),
