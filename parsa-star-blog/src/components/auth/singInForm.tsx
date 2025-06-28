@@ -12,12 +12,13 @@ import StatusCodes from "@/server/lib/constants";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { SignInAction } from "@/server/actions/user/auth";
-
+import { useRouter } from "next/navigation";
 
 const SingInForm = () => {
     const methods = useForm<TSignInSchema>({
         resolver: zodResolver(userFormSchema.auth.logIn),
     });
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -30,6 +31,7 @@ const SingInForm = () => {
                 return toast.error(result.message);
             }
             toast.success(result.message);
+            router.push("/dashboard");
         } catch (error) {
             toast.error("something went wrong try again later");
         }

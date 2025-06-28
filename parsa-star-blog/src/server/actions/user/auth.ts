@@ -10,7 +10,7 @@ import {
 import { TCreateUserPayload, TSignInPayload } from "@/types/user/api";
 import { userServerSchema } from "@/types/user/schemas/serverSchema";
 import { eq, InferInsertModel } from "drizzle-orm";
-import { createSession, getSession, RemoveSession } from "./session";
+import { createSession, RemoveSession } from "./session";
 import { ShortResponses } from "@/server/lib/shortResponses";
 import { getSessionCookie } from "@/server/lib/cookies";
 
@@ -122,19 +122,6 @@ export const logOutAction = async () => {
         }
         const logout = await RemoveSession(sessionId.value);
         return logout;
-    } catch (error) {
-        return ShortResponses.severError(error);
-    }
-};
-
-export const whoAmIAction = async () => {
-    try {
-        const sessionId = await getSessionCookie();
-        if (!sessionId || !sessionId.value) {
-            return ShortResponses.unAuthorized;
-        }
-        const session = await getSession(sessionId.value);
-        return session;
     } catch (error) {
         return ShortResponses.severError(error);
     }

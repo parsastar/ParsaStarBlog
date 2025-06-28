@@ -39,7 +39,10 @@ export const getSession = async (sessionId: string) => {
         return ShortResponses.unAuthorized();
     }
 
-    return session;
+    return {
+        status: StatusCodes.success,
+        session,
+    };
 };
 
 export const RemoveSession = async (sessionId: string) => {

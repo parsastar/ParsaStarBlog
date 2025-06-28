@@ -12,8 +12,10 @@ import StatusCodes from "@/server/lib/constants";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { signUpAction } from "@/server/actions/user/auth";
+import {  useRouter } from "next/navigation";
 
 const SignUpForm = () => {
+    const router = useRouter()
     const methods = useForm<TSignUpSchema>({
         resolver: zodResolver(userFormSchema.auth.signUp),
     });
@@ -30,6 +32,8 @@ const SignUpForm = () => {
                 return toast.error(result.message);
             }
             toast.success(result.message);
+            router.push("/dashboard");
+
         } catch (error) {
             toast.error("something went wrong try again later");
         }
@@ -77,7 +81,10 @@ const SignUpForm = () => {
                 label="Email"
                 error={errors.email?.message?.toString()}
             >
-                <StyledInput placeholder="your_email@gmail.com" {...register("email")} />
+                <StyledInput
+                    placeholder="your_email@gmail.com"
+                    {...register("email")}
+                />
             </LabelWrapper>
             <div className="flex items-start gap-4 w-full">
                 <LabelWrapper
@@ -85,14 +92,20 @@ const SignUpForm = () => {
                     label="Password"
                     error={errors.password?.message?.toString()}
                 >
-                    <StyledInput placeholder={"Your_password"} {...register("password")} />
+                    <StyledInput
+                        placeholder={"Your_password"}
+                        {...register("password")}
+                    />
                 </LabelWrapper>
                 <LabelWrapper
                     index={5}
                     label="Repeat password"
                     error={errors.repeatPassword?.message?.toString()}
                 >
-                    <StyledInput placeholder="Repeat_password" {...register("repeatPassword")} />
+                    <StyledInput
+                        placeholder="Repeat_password"
+                        {...register("repeatPassword")}
+                    />
                 </LabelWrapper>
             </div>
             <m.div

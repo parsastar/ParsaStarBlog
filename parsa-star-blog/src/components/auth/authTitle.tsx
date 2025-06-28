@@ -18,7 +18,7 @@ const AuthTitle = () => {
                 duration={0.5}
                 type="char"
                 el={"h1"}
-                text={pathname == "/signin" ? " Sign in" : " Sign up"}
+                text={pathname == "/signin" ? "Sign in" : "Sign up"}
                 className="text-red-500 uppercase lg:text-[200px] md:text-[120px] sm:text-title  "
             />
             <p className="text-sm font-roboto_mono ">
@@ -30,7 +30,7 @@ const AuthTitle = () => {
                     className="text-red-500 underline"
                 >
                     {" "}
-                    {pathname == "/signup" ? " Sign in" : " Sign in"}
+                    {pathname == "/signup" ? " Sign in" : " Sign up"}
                 </Link>
             </p>
         </div>
