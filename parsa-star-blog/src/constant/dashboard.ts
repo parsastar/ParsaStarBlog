@@ -43,3 +43,8 @@ export const dashboardPages: TDashboardPages = [
         icon: BadgeCheck,
     },
 ];
+
+export const dashBoardPageSizes = {
+    users: 20,
+    
+};
