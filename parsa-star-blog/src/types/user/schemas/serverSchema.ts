@@ -32,10 +32,11 @@ const editUserSchema = z.object({
     ...userBase,
 });
 
+const postUserSchema = editUserSchema.omit({ id: true });
 export const userServerSchema = {
     auth: {
         signUp,
-        logIn: signInUserSchema,
+        signin: signInUserSchema,
     },
     profile: {
         profile: profileUserSchema,
@@ -43,5 +44,6 @@ export const userServerSchema = {
     },
     admin: {
         update: editUserSchema,
+        create : postUserSchema
     },
 };

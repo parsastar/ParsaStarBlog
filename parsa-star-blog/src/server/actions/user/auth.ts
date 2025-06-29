@@ -7,7 +7,7 @@ import {
     generateSalt,
     hashPassword,
 } from "@/server/lib/passwordHasher";
-import { TCreateUserPayload, TSignInPayload } from "@/types/user/api";
+import { TSingUpPayload, TSignInPayload } from "@/types/user/api";
 import { userServerSchema } from "@/types/user/schemas/serverSchema";
 import { eq, InferInsertModel } from "drizzle-orm";
 import { createSession, RemoveSession } from "./session";
@@ -16,7 +16,7 @@ import { getSessionCookie } from "@/server/lib/cookies";
 
 type TNewUser = InferInsertModel<typeof userT>;
 
-export const signUpAction = async (payload: TCreateUserPayload) => {
+export const signUpAction = async (payload: TSingUpPayload) => {
     const { success, data, error } =
         userServerSchema.auth.signUp.safeParse(payload);
 
@@ -24,7 +24,7 @@ export const signUpAction = async (payload: TCreateUserPayload) => {
         return ShortResponses.schemaError(error);
     }
 
-    const { email, firstName, lastName, password, phoneNumber } = data;
+    const { email, password } = data;
 
     const existingUser = await db.query.userT.findFirst({
         where: eq(userT.email, email),
@@ -42,10 +42,7 @@ export const signUpAction = async (payload: TCreateUserPayload) => {
         const hashedPass = await hashPassword(password, salt);
 
         const newUser: TNewUser = {
-            first_name: firstName,
-            last_name: lastName,
-            phone_number: phoneNumber,
-            email,
+            ...data,
             password: hashedPass,
             salt,
         };
@@ -79,7 +76,7 @@ export const signUpAction = async (payload: TCreateUserPayload) => {
 
 export const SignInAction = async (payload: TSignInPayload) => {
     const { success, data, error } =
-        userServerSchema.auth.logIn.safeParse(payload);
+        userServerSchema.auth.signin.safeParse(payload);
     if (!success) {
         return ShortResponses.schemaError(error);
     }
@@ -121,7 +118,7 @@ export const logOutAction = async () => {
             return ShortResponses.unAuthorized();
         }
         const logout = await RemoveSession(sessionId.value);
-        
+
         return logout;
     } catch (error) {
         return ShortResponses.severError(error);

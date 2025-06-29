@@ -47,32 +47,32 @@ const SignUpForm = () => {
                 <LabelWrapper
                     index={0}
                     label="First name"
-                    error={errors.firstName?.message?.toString()}
+                    error={errors.first_name?.message?.toString()}
                 >
                     <StyledInput
                         placeholder="Your firstName "
-                        {...register("firstName")}
+                        {...register("first_name")}
                     />
                 </LabelWrapper>
                 <LabelWrapper
                     index={1}
                     label="Last name"
-                    error={errors.lastName?.message?.toString()}
+                    error={errors.last_name?.message?.toString()}
                 >
                     <StyledInput
                         placeholder="your lastName"
-                        {...register("lastName")}
+                        {...register("last_name")}
                     />
                 </LabelWrapper>
             </div>
             <LabelWrapper
                 index={2}
                 label="Phone number"
-                error={errors.phoneNumber?.message?.toString()}
+                error={errors.phone_number?.message?.toString()}
             >
                 <StyledInput
                     placeholder="0*********"
-                    {...register("phoneNumber")}
+                    {...register("phone_number")}
                 />
             </LabelWrapper>
             <LabelWrapper
