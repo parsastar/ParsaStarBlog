@@ -33,7 +33,7 @@ export const signUpAction = async (payload: TSingUpPayload) => {
     if (existingUser !== undefined) {
         return {
             status: StatusCodes.badRequest,
-            message: "User already exists",
+            message: "User with this Email already exists",
         };
     }
 

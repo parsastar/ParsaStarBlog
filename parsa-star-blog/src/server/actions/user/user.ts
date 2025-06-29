@@ -9,13 +9,19 @@ import {
 } from "drizzle-orm";
 import { db } from "@/db";
 import { userT } from "@/db/schema";
-import { TGetUser, TGetUsers, TPostUserPayload } from "@/types/user/api";
+import {
+    TGetUser,
+    TGetUsers,
+    TPostUserPayload,
+    TPutUserPayload,
+} from "@/types/user/api";
 import { ShortResponses } from "@/server/lib/shortResponses";
 import { TServerResponse } from "@/types/shared";
 import StatusCodes from "@/server/lib/constants";
 import { filterSchemas, TFilterUsers } from "@/types/sharedSchema";
 import { userServerSchema } from "@/types/user/schemas/serverSchema";
 import { generateSalt, hashPassword } from "@/server/lib/passwordHasher";
+import { z } from "zod";
 
 type TNewUser = InferInsertModel<typeof userT>;
 
@@ -80,14 +86,25 @@ export const GetUsers = async (
     }
 };
 
-export const postUserAction = async (payload: TPostUserPayload) => {
+export const postUserAction = async (
+    payload: TPostUserPayload
+): Promise<TServerResponse> => {
     const { success, data, error } =
         userServerSchema.admin.create.safeParse(payload);
     if (!success) {
         return ShortResponses.schemaError(error);
     }
     try {
-        const { password } = data;
+        const { password, email, first_name, last_name } = data;
+        const emailExists = await db.query.userT.findFirst({
+            where: eq(userT.email, email),
+        });
+        if (emailExists) {
+            return {
+                status: StatusCodes.badRequest,
+                message: "User with this Email already exists",
+            };
+        }
         const salt = await generateSalt();
         const hashedPassword = await hashPassword(password, salt);
         const newUser: TNewUser = {
@@ -95,12 +112,69 @@ export const postUserAction = async (payload: TPostUserPayload) => {
             password: hashedPassword,
             salt: salt,
         };
+        await db.insert(userT).values(newUser); // insert use to db
+        return {
+            status: StatusCodes.success,
+            message: `user "${
+                first_name + " " + last_name
+            }"  created successfully`,
+        };
     } catch (error) {
         return ShortResponses.severError(error);
     }
 };
 
+export const putUserAction = async (
+    payload: TPutUserPayload
+): Promise<TServerResponse> => {
+    const { success, error, data } =
+        userServerSchema.admin.update.safeParse(payload);
+    if (!success) {
+        return ShortResponses.schemaError(error);
+    }
+    try {
+        const { email, password, id } = data;
+        const emailExists = await db.query.userT.findFirst({
+            where: eq(userT.email, email),
+        });
+        if (emailExists) {
+            return {
+                status: StatusCodes.badRequest,
+                message: "user with this email already exists ",
+            };
+        }
+        const salt = await generateSalt();
+        const hashedPassword = await hashPassword(password, salt);
+        await db
+            .update(userT)
+            .set({ ...data, salt: salt, password: hashedPassword })
+            .where(eq(userT.id, id));
 
+        return {
+            status: StatusCodes.success,
+            message: "user has been updated Successfully",
+        };
+    } catch (error) {
+        return ShortResponses.severError(error);
+    }
+};
 
+export const deleteUserAction = async (userId: number) => {
+    const { success, error, data } = z
+        .object({ userId: z.number() })
+        .safeParse({ userId });
+    if (!success) {
+        return ShortResponses.schemaError(error);
+    }
+    try {
+        const { userId } = data;
+        await db.delete(userT).where(eq(userT.id, userId)); // since we defined  cascade on delete for the related tables they will remove automatically
+        return {
+            status: StatusCodes.success,
+            message: "user has been deleted successfully ",
+        };
+    } catch (error) {
+        return ShortResponses.severError(error);
+    }
+};
 
-    

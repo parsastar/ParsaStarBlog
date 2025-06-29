@@ -13,6 +13,6 @@ const StatusCodes = {
     notImplemented: 501,
     badGateway: 502,
     serviceUnavailable: 503,
-  };
-  
-  export default StatusCodes;
+} as const;
+
+export default StatusCodes;
