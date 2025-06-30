@@ -44,7 +44,24 @@ export const dashboardPages: TDashboardPages = [
     },
 ];
 
-export const dashBoardPageSizes = {
-    users: 20,
-    
-};
+export const sortArray: TSort[] = ["asc", "dsc"];
+export type TSort = "asc" | "dsc";
+
+export const DashboardPagesDefaults = {
+    users: {
+        authorSection: {
+            startPage: 1,
+            pageSize: 20,
+            sorting: "asc",
+            search: undefined,
+            role: "author" as TUserRoles,
+        },
+        ReaderSection: {
+            startPage: 1,
+            pageSize: 20,
+            search: undefined,
+            sorting: "asc",
+            role: "author" as TUserRoles,
+        },
+    },
+} as const;

@@ -1,4 +1,6 @@
+"use server";
 import {
+    and,
     asc,
     count,
     desc,
@@ -43,23 +45,25 @@ export const GetUserById = async (
     };
 };
 
-export const GetUsers = async (
-    payload: TFilterUsers
-): Promise<TGetUsers | TServerResponse> => {
+export const GetUsers = async (payload: TFilterUsers) => {
     const { success, error, data } = filterSchemas.users.safeParse(payload);
     if (!success) {
         return ShortResponses.schemaError(error);
     }
     try {
-        const { sort, page, pageSize, search } = data; // extracting from safe data
+        const { sort, page, pageSize, search, role } = data; // extracting from safe data
 
-        const whereClause = search // this is used for searching first , last name or email
-            ? or(
-                  iLike(userT.first_name, `%${search}%`),
-                  iLike(userT.last_name, `%${search}%`),
-                  iLike(userT.password, `%${search}%`) // usually not recommended to search passwords
-              )
-            : undefined;
+        const whereClause = and(
+            role ? eq(userT.role, role) : undefined,
+            search // this is used for searching first , last name or email
+                ? or(
+                      iLike(userT.first_name, `%${search}%`),
+                      iLike(userT.last_name, `%${search}%`),
+                      iLike(userT.email, `%${search}%`)
+                  )
+                : undefined
+        );
+
         const usersCount = await db
             .select({ totalRows: count() })
             .from(userT)
@@ -177,4 +181,3 @@ export const deleteUserAction = async (userId: number) => {
         return ShortResponses.severError(error);
     }
 };
-

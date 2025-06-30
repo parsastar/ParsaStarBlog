@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { userRolesArray } from "./user/shared";
 
 // schemas for pagination sorting and search of a request payload for example getUsers
 const paginationSchema = z.object({
@@ -18,6 +19,7 @@ const getUsersSchema = z.object({
     ...paginationSchema.shape,
     ...sortSchema.shape,
     ...searchSchema.shape,
+    role: z.enum(userRolesArray).nullable(),
 });
 export type TFilterUsers = z.infer<typeof getUsersSchema>;
 
