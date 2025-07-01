@@ -26,7 +26,7 @@ export function AppSidebar() {
             await logOutAction();
             toast.success("You've logged out successfully");
             router.push("/signin");
-        } catch (error) {
+        } catch {
             toast.error("log out failed , try again later");
         }
     };

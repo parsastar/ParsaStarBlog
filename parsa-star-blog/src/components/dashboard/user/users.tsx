@@ -18,7 +18,7 @@ import { useConfirmDialogStore } from "@/zustand/confirmDialogStore";
 const Users = () => {
     const searchParams = useSearchParams();
     const { pageSize, startPage, role, sorting, search } =
-        DashboardPagesDefaults.users.authorSection;
+        DashboardPagesDefaults.users;
 
     const params: TFilterUsers = {
         role: userRolesArray.includes(searchParams.get("role") as TUserRoles)

@@ -11,12 +11,7 @@ import {
 } from "drizzle-orm";
 import { db } from "@/db";
 import { userT } from "@/db/schema";
-import {
-    TGetUser,
-    TGetUsers,
-    TPostUserPayload,
-    TPutUserPayload,
-} from "@/types/user/api";
+import { TGetUser, TPostUserPayload, TPutUserPayload } from "@/types/user/api";
 import { ShortResponses } from "@/server/lib/shortResponses";
 import { TServerResponse } from "@/types/shared";
 import StatusCodes from "@/server/lib/constants";
@@ -37,7 +32,7 @@ export const GetUserById = async (
     if (!foundUser) {
         return ShortResponses.notFoundError("user");
     }
-    const { salt, password, ...sendingUser } = foundUser;
+    const { salt: _salt, password: _password, ...sendingUser } = foundUser;
 
     return {
         status: StatusCodes.success,
@@ -173,7 +168,7 @@ export const deleteUserAction = async (userId: number) => {
     }
     try {
         const { userId } = data;
-        await RemoveSession(String(userId)); // we try to remove the session for the user but its wont effect the function flow 
+        await RemoveSession(String(userId)); // we try to remove the session for the user but its wont effect the function flow
         await db.delete(userT).where(eq(userT.id, userId)); // since we defined  cascade on delete for the related tables they will remove automatically
         return {
             status: StatusCodes.success,

@@ -49,19 +49,10 @@ export type TSort = "asc" | "dsc";
 
 export const DashboardPagesDefaults = {
     users: {
-        authorSection: {
-            startPage: 1,
-            pageSize: 20,
-            sorting: "asc",
-            search: undefined,
-            role: null as TUserRoles | null,
-        },
-        ReaderSection: {
-            startPage: 1,
-            pageSize: 20,
-            search: undefined,
-            sorting: "asc",
-            role: null as TUserRoles | null,
-        },
+        startPage: 1,
+        pageSize: 20,
+        search: undefined,
+        sorting: "asc",
+        role: null as TUserRoles | null,
     },
 } as const;

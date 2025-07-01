@@ -12,7 +12,7 @@ interface ConfirmDialogStore {
     title?: string;
     description?: string;
     action?: TAction;
-    queryKeys?: any[];
+    queryKeys?: string[];
     toastMessages?: TToastMessages;
     setContent: (Content: TContent) => void;
     setClose: () => void;
@@ -22,7 +22,7 @@ type TContent = {
     title: string;
     description: string;
     action?: TAction;
-    queryKeys?: any[];
+    queryKeys?: string[];
     toastMessages?: TToastMessages;
 };
 const initialState: Omit<ConfirmDialogStore, "setContent" | "setClose"> = {

@@ -1,7 +1,8 @@
-import { dashBoardPageSizes } from "@/constant/dashboard";
+import { DashboardPagesDefaults, sortArray, TSort } from "@/constant/dashboard";
 import { GetUsers, postUserAction } from "@/server/actions/user/user";
 import { TFilterUsers } from "@/types/sharedSchema";
 import { TPostUserPayload } from "@/types/user/api";
+import { TUserRoles, userRolesArray } from "@/types/user/shared";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -12,13 +13,19 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
+    const { startPage, pageSize, sorting } = DashboardPagesDefaults.users;
     const params: TFilterUsers = {
-        page: Number(searchParams.get("page")) || 1,
-        pageSize:
-            Number(searchParams.get("pageSize")) || dashBoardPageSizes.users,
-        search: searchParams.get("search"),
-        sort: searchParams.get("sort") == "asc" ? "asc" : "dsc",
+        role: userRolesArray.includes(searchParams.get("role") as TUserRoles)
+            ? (searchParams.get("role") as TUserRoles)
+            : null, // to be changed
+        page: Number(searchParams.get("page")) || startPage,
+        pageSize: Number(searchParams.get("pageSize")) || pageSize,
+        search: searchParams.get("search") || null,
+        sort: sortArray.includes(searchParams.get("sort") as TSort)
+            ? (searchParams.get("sort") as TSort)
+            : sorting,
     };
+
     const res = await GetUsers(params);
     return NextResponse.json(res);
 }

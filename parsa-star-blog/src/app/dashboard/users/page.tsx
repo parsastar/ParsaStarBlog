@@ -1,9 +1,8 @@
-"use client";
 import DashboardTitle from "@/components/dashboard/shared/dashboardTitle";
-import Authors from "@/components/dashboard/user/users";
+import Users from "@/components/dashboard/user/users";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Page = () => {
     return (
@@ -14,7 +13,9 @@ const Page = () => {
                     Create User <Plus />
                 </Button>
             </DashboardTitle>
-            <Authors />
+            <Suspense>
+                <Users />
+            </Suspense>
         </div>
     );
 };
