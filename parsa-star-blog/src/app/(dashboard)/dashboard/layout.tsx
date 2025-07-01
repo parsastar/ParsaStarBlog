@@ -1,3 +1,5 @@
+
+import LazyConfirmDialog from "@/components/common/LazyComponents/LazyConfirmDialog";
 import DashboardHeader from "@/components/dashboard/shared/dashboardHeader";
 import { AppSidebar } from "@/components/dashboard/shared/dashboardSideBar";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -13,6 +15,7 @@ export default async function DashboardLayout({
             <main className="w-full !font-roboto">
                 <DashboardHeader />
                 {children}
+                <LazyConfirmDialog />
             </main>
         </SidebarProvider>
     );

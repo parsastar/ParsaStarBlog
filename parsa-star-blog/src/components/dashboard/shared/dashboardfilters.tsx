@@ -101,6 +101,7 @@ const DashboardFilters = ({
                     <div className="relative group lg:order-first order-5 w-auto flex-1  min-w-[300px] md:min-w-[400px] ">
                         <input
                             {...register("search")}
+                            placeholder="Search...."
                             className="bg-secondary-500 duration-200 focus:bg-secondary-600 rounded-full font-normal text-sm focus:outline-none  p-5 w-full indent-9"
                         />
                         <button

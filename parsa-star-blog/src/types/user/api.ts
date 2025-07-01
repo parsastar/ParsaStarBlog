@@ -6,15 +6,16 @@ const { profile: _profile, auth: _auth, admin: _admin } = userServerSchema; // w
 
 // actual user type that we use for the client
 export type TUser = z.infer<typeof _admin.update>;
+export type TUserWithoutPassword = Omit<TUser, "password">;
 // server responses types
 export type TGetUser = TServerResponse & {
-    user: Omit<TUser, "password">;
+    user: TUserWithoutPassword;
 };
 export type TGetUsers = TMultiPages & {
-    users: Omit<TUser, "password">[];
+    users: TUserWithoutPassword[];
 };
 export type TPostUserResponse = TServerResponse & {
-    user: Omit<TUser, "password">;
+    user: TUserWithoutPassword;
 };
 
 // request payloads for post

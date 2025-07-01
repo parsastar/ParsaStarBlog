@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const UserCards = (props: UserDataListProps) => {
     const router = useRouter();
-    const { status, pageSize } = props;
+    const { status, pageSize, actions } = props;
 
     if (status == "pending") return <UserCardsMock pageSize={pageSize} />;
     if (status == "error")
@@ -92,17 +92,26 @@ const UserCards = (props: UserDataListProps) => {
                                 </p>
                             </div>
                             <div className="flex gap-1 text-white">
-                                <Button className="bg-black hover:bg-black/90 aspect-square size-9">
-                                    {" "}
-                                    <Eye />{" "}
-                                </Button>
-                                <Button className="bg-red-600 hover:bg-red-600/90 aspect-square size-9">
+                                <Button
+                                    onClick={() => actions.Delete(user)}
+                                    className="bg-red-600 hover:bg-red-600/90 aspect-square size-9"
+                                >
                                     {" "}
                                     <Trash2 />{" "}
                                 </Button>
-                                <Button className="bg-blue-600 hover:bg-blue-600/90 aspect-square size-9">
+                                <Button
+                                    onClick={() => actions.Edit(user)}
+                                    className="bg-blue-600 hover:bg-blue-600/90 aspect-square size-9"
+                                >
                                     {" "}
                                     <Pen />{" "}
+                                </Button>
+                                <Button
+                                    onClick={() => actions.View(user)}
+                                    className="bg-black hover:bg-black/90 aspect-square size-9"
+                                >
+                                    {" "}
+                                    <Eye />{" "}
                                 </Button>
                             </div>
                         </div>

@@ -15,7 +15,7 @@ import { UserDataListProps } from "./users";
 
 const UsersTable = (props: UserDataListProps) => {
     const router = useRouter();
-    const { status, pageSize } = props;
+    const { status, pageSize, actions } = props;
     const tableCols = [
         { label: "First Name", key: "first_name" },
         { label: "Last Name", key: "last_name" },
@@ -68,22 +68,25 @@ const UsersTable = (props: UserDataListProps) => {
                                 <TableCell className="text-right">
                                     <div className="flex gap-1 justify-end">
                                         <Button
-                                            size="icon"
-                                            className="bg-black hover:bg-black/90 text-white"
-                                        >
-                                            <Eye className="size-4" />
-                                        </Button>
-                                        <Button
+                                            onClick={() => actions.Delete(user)}
                                             size="icon"
                                             className="bg-red-600 hover:bg-red-600/90 text-white"
                                         >
                                             <Trash2 className="size-4" />
                                         </Button>
                                         <Button
+                                            onClick={() => actions.Edit(user)}
                                             size="icon"
                                             className="bg-blue-600 hover:bg-blue-600/90 text-white"
                                         >
                                             <Pen className="size-4" />
+                                        </Button>
+                                        <Button
+                                            onClick={() => actions.View(user)}
+                                            size="icon"
+                                            className="bg-black hover:bg-black/90 text-white"
+                                        >
+                                            <Eye className="size-4" />
                                         </Button>
                                     </div>
                                 </TableCell>

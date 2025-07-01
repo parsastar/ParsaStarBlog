@@ -24,6 +24,7 @@ import { filterSchemas, TFilterUsers } from "@/types/sharedSchema";
 import { userServerSchema } from "@/types/user/schemas/serverSchema";
 import { generateSalt, hashPassword } from "@/server/lib/passwordHasher";
 import { z } from "zod";
+import { RemoveSession } from "./session";
 
 type TNewUser = InferInsertModel<typeof userT>;
 
@@ -172,6 +173,7 @@ export const deleteUserAction = async (userId: number) => {
     }
     try {
         const { userId } = data;
+        await RemoveSession(String(userId)); // we try to remove the session for the user but its wont effect the function flow 
         await db.delete(userT).where(eq(userT.id, userId)); // since we defined  cascade on delete for the related tables they will remove automatically
         return {
             status: StatusCodes.success,
