@@ -19,7 +19,7 @@ const Header = () => {
                 >
                     {SiteInfo.siteName}
                 </Link>
-                {Pages.map((page) => (
+                {Pages.slice(0, 2).map((page) => (
                     <Link
                         key={page.href}
                         className={` w-full uppercase hover:text-red-300 text-center duration-200 font-semibold sm:text-blogTitle text-xl lg:text-logo   z-10 ${

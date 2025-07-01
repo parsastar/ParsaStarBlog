@@ -7,10 +7,11 @@ export async function middleware(req: NextRequest) {
     return await middlewareAuth(req);
 }
 
-const authPaths = ["/signin", "/signup"];
+const authPaths = ["/auth/signin", "/auth/signup"];
 const dashboardPath = "/dashboard";
 
 const middlewareAuth = async (req: NextRequest) => {
+    console.log("in middleware ");
     const { pathname } = req.nextUrl;
     const sessionCookie = req.cookies.get(Cookie_Session_Key)?.value;
 

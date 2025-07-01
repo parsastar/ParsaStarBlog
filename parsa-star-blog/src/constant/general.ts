@@ -1,10 +1,12 @@
-
 export const SiteInfo = {
     siteName: "Parsastar",
 };
 export const Pages = [
     { name: "home", href: "/" },
     { name: "blogs", href: "/blogs" },
+    { name: "Sign Up", href: "/auth/signup" },
+    { name: "Sign In", href: "/auth/signin" },
+    { name: "Dashboard", href: "/dashboard" },
 ] as const;
 
 export const Socials = [

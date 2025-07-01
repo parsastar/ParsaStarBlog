@@ -26,11 +26,11 @@ const AuthTitle = () => {
                 Already have an account?{" "}
                 <Link
                     prefetch={true}
-                    href={pathname == "/signin" ? "/signup" : "/signin"}
+                    href={pathname == "/auth/signin" ? "/auth/signup" : "/auth/signin"}
                     className="text-red-500 underline"
                 >
                     {" "}
-                    {pathname == "/signup" ? " Sign in" : " Sign up"}
+                    {pathname == "/auth/signup" ? " Sign in" : " Sign up"}
                 </Link>
             </p>
         </div>

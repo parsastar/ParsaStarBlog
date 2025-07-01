@@ -1,4 +1,5 @@
 import AnimatedLine from "@/components/common/animatedLine";
+import { Pages } from "@/constant/general";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -12,12 +13,15 @@ export default function Home() {
                     Hey There Welcome to my Blogs Website{" "}
                 </h1>
                 <div className="flex gap-10 items-center w-full my-10 bg-secondary-500 justify-center ">
-                    <StyledLink label="Blogs" href="/blogs" />
-                    <StyledLink label="Sign up" href="/signup" />
-                    <StyledLink label="Sign in" href="/signin" />
+                    {Pages.map((page) => (
+                        <StyledLink
+                            key={page.name}
+                            label={page.name}
+                            href={page.href}
+                        />
+                    ))}
                 </div>
                 <AnimatedLine />
-
             </div>
         </div>
     );
