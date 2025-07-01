@@ -54,14 +54,14 @@ export const DashboardPagesDefaults = {
             pageSize: 20,
             sorting: "asc",
             search: undefined,
-            role: "author" as TUserRoles,
+            role: null as TUserRoles | null,
         },
         ReaderSection: {
             startPage: 1,
             pageSize: 20,
             search: undefined,
             sorting: "asc",
-            role: "author" as TUserRoles,
+            role: null as TUserRoles | null,
         },
     },
 } as const;

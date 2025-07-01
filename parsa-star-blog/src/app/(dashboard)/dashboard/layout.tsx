@@ -10,7 +10,7 @@ export default async function DashboardLayout({
     return (
         <SidebarProvider>
             <AppSidebar />
-            <main className="w-full ">
+            <main className="w-full !font-roboto">
                 <DashboardHeader />
                 {children}
             </main>

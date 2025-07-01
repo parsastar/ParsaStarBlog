@@ -23,7 +23,7 @@ const DashboardHeader = () => {
     };
 
     return (
-        <div className="w-full flex items-center font-roboto text-sm bg-[#fafafa] p-2">
+        <div className="w-full sticky top-0 z-10 flex items-center font-roboto text-sm bg-[#fafafa] p-2">
             <SidebarTrigger />
             <div className="flex mx-5 items-center gap-1">
                 {generatePathArr().map((page, index) => (

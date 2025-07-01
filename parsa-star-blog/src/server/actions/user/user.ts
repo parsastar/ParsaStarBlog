@@ -73,7 +73,7 @@ export const GetUsers = async (payload: TFilterUsers) => {
             columns: { password: false, salt: false },
             where: whereClause,
             limit: pageSize,
-            offset: page * pageSize,
+            offset: (page - 1) * pageSize,
             orderBy: [
                 sort == "asc" ? asc(userT.created_at) : desc(userT.created_at),
             ],
