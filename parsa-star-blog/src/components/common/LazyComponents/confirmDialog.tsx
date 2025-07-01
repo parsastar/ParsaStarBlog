@@ -81,7 +81,11 @@ export default function ConfirmDialog() {
                             Close
                         </Button>
                     </DialogClose>
-                    <Button className="flex gap-1 items-center" disabled={isPending} onClick={handleAction}>
+                    <Button
+                        className="flex gap-1 items-center"
+                        disabled={isPending}
+                        onClick={handleAction}
+                    >
                         Confirm{" "}
                         {isPending && (
                             <LoaderCircle className={"animate-spin"} />
