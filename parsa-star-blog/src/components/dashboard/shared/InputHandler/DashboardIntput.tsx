@@ -5,6 +5,7 @@ import { TDashboardInputs } from "../../dashboardTypes";
 import TextInput from "./Inputs/textInput";
 import TextAreaInput from "./Inputs/textAreaInput";
 import SelectInput from "./Inputs/selectInput";
+import ImageInput from "./Inputs/imageInput";
 
 const DashboardInputs = <T extends Record<string, any>>(
     props: TDashboardInputs<T>
@@ -21,6 +22,8 @@ const DashboardInputs = <T extends Record<string, any>>(
                 return <TextAreaInput {...input} />;
             case "select":
                 return <SelectInput {...input} />;
+            case "image":
+                return <ImageInput {...input} />;
             default:
                 return <div>hey</div>;
         }
@@ -28,6 +31,7 @@ const DashboardInputs = <T extends Record<string, any>>(
     return (
         <InputWrapper
             label={label}
+            WrapperClass={wrapperClass}
             error={(errors as FieldErrors<T>)[input.formKey]?.message as string}
         >
             {chooseInput()}

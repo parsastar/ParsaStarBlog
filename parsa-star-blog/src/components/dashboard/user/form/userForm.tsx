@@ -10,8 +10,6 @@ import { postUserAction, putUserAction } from "@/server/actions/user/user";
 import StatusCodes from "@/server/lib/constants";
 import { queryClient } from "@/app/provider";
 import { queryKeys } from "@/constant/querykeys";
-import InputWrapper from "../../shared/InputHandler/InputWrapper";
-import { Textarea } from "@/components/ui/textarea";
 import { userRolesArray } from "@/types/user/shared";
 import { TUserWithoutPassword } from "@/types/user/api";
 import { Button } from "@/components/ui/button";
@@ -30,10 +28,8 @@ const UserForm = ({
     });
     const {
         formState: { errors, isSubmitting },
-        setValue,
         register,
         handleSubmit,
-        watch,
     } = methods;
     const onSubmit = async (data: TCreateUserSchema) => {
         try {
@@ -82,7 +78,15 @@ const UserForm = ({
             { label: "Email", input: { formKey: "email", type: "text" } },
         ],
         [
-            { label: "Email", input: { formKey: "email", type: "text" } },
+            {
+                label: "Image",
+                wrapperClass: "max-w-[150px]  flex-1",
+                input: {
+                    formKey: "image",
+                    type: "image",
+                    imageFile: "imageFile",
+                },
+            },
             {
                 label: "About ",
                 input: {
@@ -133,25 +137,6 @@ const UserForm = ({
                         ))}
                     </div>
                 ))}
-                <div className="w-full items-start flex gap-3">
-                    <InputWrapper
-                        WrapperClass="max-w-[150px]  flex-1"
-                        label="Image"
-                        error={errors.image?.message}
-                    >
-                        <div className="size-[150px] bg-gray-400" />
-                    </InputWrapper>
-                    <InputWrapper
-                        WrapperClass="flex-1 w-full"
-                        label="About"
-                        error={errors.about?.message}
-                    >
-                        <Textarea
-                            className="min-h-[150px] w-full"
-                            {...register("about")}
-                        />
-                    </InputWrapper>
-                </div>
                 <Button
                     disabled={isSubmitting}
                     size={"lg"}

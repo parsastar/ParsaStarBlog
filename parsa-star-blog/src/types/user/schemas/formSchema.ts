@@ -94,8 +94,7 @@ const UpDateUserSchema = z.object({
             (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
             "accepted file types are :  jpg/jpeg/png/webp"
         )
-        .nullable()
-        .optional(),
+        .nullable(),
 });
 
 const postUserSchema = UpDateUserSchema.omit({ id: true });
