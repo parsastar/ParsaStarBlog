@@ -4,8 +4,8 @@ const ConfirmDialog = dynamic(() => import("./confirmDialog"), {
     ssr: false,
 });
 
-const LazyConfirmDialog = () => {
+export const LazyConfirmDialog = () => {
     return <ConfirmDialog />;
 };
 
-export default LazyConfirmDialog;
+

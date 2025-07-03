@@ -1,3 +1,4 @@
+import { LazyUserDrawer } from "@/components/common/LazyComponents/LazyDrawers";
 import DashboardTitle from "@/components/dashboard/shared/dashboardTitle";
 import Users from "@/components/dashboard/user/users";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ const Page = () => {
             <Suspense>
                 <Users />
             </Suspense>
+            <LazyUserDrawer />
         </div>
     );
 };

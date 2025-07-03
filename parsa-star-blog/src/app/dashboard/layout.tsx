@@ -1,4 +1,4 @@
-import LazyConfirmDialog from "@/components/common/LazyComponents/LazyConfirmDialog";
+import { LazyConfirmDialog } from "@/components/common/LazyComponents/LazyDialogs";
 import DashboardHeader from "@/components/dashboard/shared/dashboardHeader";
 import { AppSidebar } from "@/components/dashboard/shared/dashboardSideBar";
 import { SidebarProvider } from "@/components/ui/sidebar";
