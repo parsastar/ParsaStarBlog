@@ -28,11 +28,17 @@ const passwordChangeSchema = z.object({
     newPassword: z.string(),
 });
 
-const editUserSchema = z.object({
-    ...userBase,
-});
+const editUserSchema = z
+    .object({
+        ...userBase,
+    })
+    .omit({ password: true });
 
-const postUserSchema = editUserSchema.omit({ id: true });
+const postUserSchema = z
+    .object({
+        ...userBase,
+    })
+    .omit({ id: true });
 export const userServerSchema = {
     auth: {
         signUp,
@@ -44,6 +50,6 @@ export const userServerSchema = {
     },
     admin: {
         update: editUserSchema,
-        create : postUserSchema
+        create: postUserSchema,
     },
 };

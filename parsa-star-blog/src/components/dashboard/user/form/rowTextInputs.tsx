@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormContext, FieldErrors, Path } from "react-hook-form";
-import InputWrapper from "../../shared/InputHandler/InputWrapper";
+import InputWrapper from "../../shared/form/InputWrapper";
 import { Input } from "@/components/ui/input";
 
 // Generic type T for form schema

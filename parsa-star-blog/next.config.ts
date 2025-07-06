@@ -16,7 +16,10 @@ const nextConfig: NextConfig = {
         ];
     },
     images: {
-        remotePatterns: [new URL("https://picsum.photos/seed/**")],
+        remotePatterns: [
+            new URL("https://picsum.photos/seed/**"),
+            new URL("https://res.cloudinary.com/**"),
+        ],
     },
 };
 

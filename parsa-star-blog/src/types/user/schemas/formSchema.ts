@@ -81,9 +81,7 @@ const changePassword = z
         }
     });
 
-// 🛠 Update user schema — safely omit repeatPassword
-const UpDateUserSchema = z.object({
-    ...userBase,
+const imageFileSchema = z.object({
     imageFile: z
         .any()
         .refine(
@@ -94,18 +92,25 @@ const UpDateUserSchema = z.object({
             (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
             "accepted file types are :  jpg/jpeg/png/webp"
         )
-        .nullable(),
+        .nullable()
+        .optional(),
 });
-
-const postUserSchema = UpDateUserSchema.omit({ id: true });
+// 🛠 Update user schema — safely omit repeatPassword
+const CreateUserBase = z
+    .object({ ...userBase, ...imageFileSchema.shape })
+    .omit({ password: true, id: true });
+const UpDateUserSchema = CreateUserBase;
+const postUserSchema = CreateUserBase.extend({ ...passwordField });
 
 // 🔡 Type definitions
 export type TSignUpSchema = z.infer<typeof signUp>;
 export type TSignInSchema = z.infer<typeof logIn>;
 export type TProfileSchema = z.infer<typeof profile>;
 export type TChangePasswordSchema = z.infer<typeof changePassword>;
-export type TUpdateUserSchema = z.infer<typeof UpDateUserSchema>;
-export type TCreateUserSchema = z.infer<typeof postUserSchema>;
+
+export type TCreateUserBaseSchema = z.infer<typeof CreateUserBase>;
+export type TPutUserSchema = z.infer<typeof UpDateUserSchema>;
+export type TPostUserSchema = z.infer<typeof postUserSchema>;
 
 // final export
 export const userFormSchema = {
@@ -120,5 +125,6 @@ export const userFormSchema = {
     admin: {
         update: UpDateUserSchema,
         create: postUserSchema,
+        base: CreateUserBase,
     },
 };

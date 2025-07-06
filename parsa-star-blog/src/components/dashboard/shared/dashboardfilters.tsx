@@ -87,9 +87,7 @@ const DashboardFilters = ({
     const restart = () => {
         reset({ ...defaultValues, sort: defaultValues.sorting });
         router.replace(`${pathname}`);
-        console.log(watch());
     };
-    console.log(errors, watch());
 
     return (
         <form

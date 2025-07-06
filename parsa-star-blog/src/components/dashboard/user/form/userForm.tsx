@@ -1,10 +1,10 @@
 import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
 import {
-    TCreateUserSchema,
+    TCreateUserBaseSchema,
+    TPostUserSchema,
+    TPutUserSchema,
     userFormSchema,
 } from "@/types/user/schemas/formSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { postUserAction, putUserAction } from "@/server/actions/user/user";
 import StatusCodes from "@/server/lib/constants";
@@ -12,54 +12,16 @@ import { queryClient } from "@/app/provider";
 import { queryKeys } from "@/constant/querykeys";
 import { userRolesArray } from "@/types/user/shared";
 import { TUserWithoutPassword } from "@/types/user/api";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
 import { TDashboardInputs } from "../../dashboardTypes";
-import DashboardInputs from "../../shared/InputHandler/DashboardIntput";
+import { ImageUploadHandler } from "@/lib/imageUploadHandler";
+import { FormCreator } from "../../shared/form/formCreator";
 
 const UserForm = ({
     selectedUser,
 }: {
     selectedUser?: TUserWithoutPassword;
 }) => {
-    const methods = useForm<TCreateUserSchema>({
-        resolver: zodResolver(userFormSchema.admin.create),
-        defaultValues: selectedUser,
-    });
-    const {
-        formState: { errors, isSubmitting },
-        register,
-        handleSubmit,
-    } = methods;
-    const onSubmit = async (data: TCreateUserSchema) => {
-        try {
-            const res = selectedUser
-                ? await putUserAction({
-                      ...data,
-                      id: selectedUser.id,
-                  })
-                : await postUserAction(data);
-
-            if (res.status !== StatusCodes.success) {
-                console.log(res.message);
-                return toast.error("some thing went wrong ");
-            }
-            await Promise.all([
-                selectedUser &&
-                    queryClient.invalidateQueries({
-                        queryKey: [queryKeys.users.get, selectedUser.id],
-                    }),
-                queryClient.invalidateQueries({
-                    queryKey: [queryKeys.users.getList],
-                }),
-            ]);
-            return toast.success(res.message);
-        } catch (error) {
-            toast.error("some thing went wrong ");
-        }
-    };
-
-    const Rows: TDashboardInputs<TCreateUserSchema>[][] = [
+    const BaseRows: TDashboardInputs<TCreateUserBaseSchema>[][] = [
         [
             {
                 label: "First Name",
@@ -124,30 +86,114 @@ const UserForm = ({
             },
         ],
     ];
-    return (
-        <FormProvider {...methods}>
-            <form
-                className="flex font-roboto flex-col gap-5"
-                onSubmit={handleSubmit(onSubmit)}
-            >
-                {Rows.map((row, index) => (
-                    <div key={index} className="w-full items-start flex gap-3">
-                        {row.map((input) => (
-                            <DashboardInputs key={input.label} {...input} />
-                        ))}
-                    </div>
-                ))}
-                <Button
-                    disabled={isSubmitting}
-                    size={"lg"}
-                    className="w-full !py-7 flex items-center justify-center "
-                >
-                    {isSubmitting ? "Submitting" : "Submit"}
-                    {isSubmitting && <Loader2 className="animate-spin" />}
-                </Button>
-            </form>
-        </FormProvider>
-    );
+
+    if (selectedUser) {
+        const PutUserOnSubmit = async (data: TPutUserSchema) => {
+            try {
+                /// handling image files start
+                const uploadedImages = await ImageUploadHandler([
+                    {
+                        imageFile: data.imageFile,
+                        imageUrl: data.image,
+                        imagePath: "image",
+                        filePath: "imageFile",
+                        initialImageUrl: selectedUser.image,
+                    },
+                ]);
+                uploadedImages.map((image) => {
+                    data[image.imagePath] = image.imageUrl;
+                    data[image.filePath] = null;
+                });
+                /// handling imageFiles ends
+                const res = await putUserAction({
+                    ...data,
+                    id: selectedUser.id,
+                });
+
+                if (res.status !== StatusCodes.success) {
+                    console.log(res.message);
+                    toast.error(res.message);
+                    return;
+                }
+                await Promise.all([
+                    queryClient.invalidateQueries({
+                        queryKey: [queryKeys.users.get, selectedUser.id],
+                    }),
+                    queryClient.invalidateQueries({
+                        queryKey: [queryKeys.users.getList],
+                    }),
+                ]);
+                toast.success(res.message);
+                return;
+            } catch (error) {
+                console.log("error : ", error);
+                toast.error("some thing went wrong ");
+            }
+        };
+        const updateUserRows = BaseRows;
+        return (
+            <FormCreator
+                onSubmit={PutUserOnSubmit}
+                defaultValues={{ ...selectedUser, imageFile: null }}
+                schema={userFormSchema.admin.update}
+                inputRows={updateUserRows}
+            />
+        );
+    }
+    if (!selectedUser) {
+        const CreateUserRows = BaseRows.map((row, index) => {
+            if (index == 1) {
+                return [
+                    ...row,
+                    {
+                        label: "password",
+                        input: { formKey: "password", type: "text" },
+                    },
+                ];
+            }
+            return row;
+        }) as TDashboardInputs<TPostUserSchema>[][];
+
+        const createUserOnSubmit = async (data: TPostUserSchema) => {
+            try {
+                /// handling image files start
+                const uploadedImages = await ImageUploadHandler([
+                    {
+                        imageFile: data.imageFile,
+                        imageUrl: data.image,
+                        imagePath: "image",
+                        filePath: "imageFile",
+                    },
+                ]);
+                uploadedImages.map((image) => {
+                    data[image.imagePath] = image.imageUrl;
+                    data[image.filePath] = null;
+                });
+                /// handling imageFiles ends
+                const res = await postUserAction(data);
+                if (res.status !== StatusCodes.success) {
+                    toast.error(res.message);
+                    return;
+                }
+
+                await queryClient.invalidateQueries({
+                    queryKey: [queryKeys.users.getList],
+                }),
+                    toast.success(res.message);
+            } catch (error) {
+                console.log("error : ", error);
+                toast.error("something went wrong");
+            }
+        };
+        return (
+            <FormCreator
+                defaultValues={{ imageFile: null }}
+                onSubmit={createUserOnSubmit}
+                schema={userFormSchema.admin.create}
+                inputRows={CreateUserRows}
+            />
+        );
+    }
 };
 
 export default UserForm;

@@ -129,25 +129,36 @@ export const putUserAction = async (
 ): Promise<TServerResponse> => {
     const { success, error, data } =
         userServerSchema.admin.update.safeParse(payload);
+
     if (!success) {
         return ShortResponses.schemaError(error);
     }
     try {
-        const { email, password, id } = data;
+        const { email, id } = data;
+        const user = await db.query.userT.findFirst({
+            columns: { email: true },
+            where: eq(userT.id, id),
+        });
+        if (!user) {
+            return ShortResponses.notFoundError(
+                "the user with the given id does not exist "
+            );
+        }
         const emailExists = await db.query.userT.findFirst({
             where: eq(userT.email, email),
         });
-        if (emailExists) {
+
+        if (emailExists && emailExists.email !== user?.email) {
             return {
                 status: StatusCodes.badRequest,
                 message: "user with this email already exists ",
             };
         }
-        const salt = await generateSalt();
-        const hashedPassword = await hashPassword(password, salt);
+
+        const { id: _id, ...changingData } = data;
         await db
             .update(userT)
-            .set({ ...data, salt: salt, password: hashedPassword })
+            .set({ ...changingData })
             .where(eq(userT.id, id));
 
         return {

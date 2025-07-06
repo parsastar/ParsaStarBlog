@@ -1,9 +1,9 @@
 export type TUserRoles = "user" | "author" | "admin";
 export const userRolesArray = ["user", "author", "admin"] as const;
 export type TUserSocials = {
-    instagram: string | null;
-    linkedin: string | null;
-    twitter: string | null;
+    instagram?: string | null;
+    linkedin?: string | null;
+    twitter?: string | null;
 };
 
 /// idea is that we share a base schema and its parts for bot client and server to validate data and prevent the dry
@@ -25,9 +25,12 @@ const emailField = {
 const phoneField = {
     phone_number: z
         .string()
-        .regex(phoneRegex, "Insert a valid phone number")
-
-        .nullable(),
+        .transform((val) => (val === "" ? undefined : val))
+        .optional()
+        .nullable()
+        .refine((val) => !val || phoneRegex.test(val), {
+            message: "Insert a valid phone number",
+        }),
 };
 const passwordField = {
     password: z
@@ -38,17 +41,17 @@ const passwordField = {
         ),
 };
 const infoField = {
-    image: z.string().nullable(),
-    about: z.string().nullable(),
-    website: z.string().nullable(),
+    image: z.string().nullable().optional(),
+    about: z.string().nullable().optional(),
+    website: z.string().nullable().optional(),
     socials: z
         .object({
-            instagram: z.string().nullable(),
-            linkedin: z.string().nullable(),
-            twitter: z.string().nullable(),
+            instagram: z.string().nullable().optional(),
+            linkedin: z.string().nullable().optional(),
+            twitter: z.string().nullable().optional(),
         })
-
-        .nullable(),
+        .nullable()
+        .optional(),
 };
 
 const roleField = { role: z.enum(userRolesArray) };
