@@ -20,11 +20,11 @@ const middlewareAuth = async (req: NextRequest) => {
     }
     if (pathname.startsWith(dashboardPath)) {
         if (!sessionCookie)
-            return NextResponse.redirect(new URL("/signin", req.url));
+            return NextResponse.redirect(new URL("/auth/signin", req.url));
         else {
             const res = await getSessionOnEdge(sessionCookie);
             if (res.status !== StatusCodes.success) {
-                const res = NextResponse.redirect(new URL("/signin", req.url));
+                const res = NextResponse.redirect(new URL("/auth/signin", req.url));
                 res.cookies.delete(Cookie_Session_Key);
                 return res;
             }
