@@ -1,9 +1,9 @@
 "use client";
 import React, { ElementType } from "react";
-import { AnimationControls, m, Variant } from "motion/react";
+import { useAnimation, m, Variant } from "motion/react";
 
 type AnimatedTextProps = {
-    controls: AnimationControls;
+    controls: ReturnType<typeof useAnimation>;
     totalDelay?: number;
     staggerDur?: number;
     type?: "word" | "char" | "all";
