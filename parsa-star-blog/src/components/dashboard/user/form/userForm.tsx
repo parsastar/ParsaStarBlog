@@ -175,6 +175,7 @@ const UserForm = ({
                     toast.error(res.message);
                     return;
                 }
+
                 await queryClient.invalidateQueries({
                     queryKey: [queryKeys.users.getList],
                 });

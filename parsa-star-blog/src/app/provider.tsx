@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { domAnimation, LazyMotion } from "motion/react";
 
 export const queryClient = new QueryClient({
     defaultOptions: { queries: { staleTime: 60 * 5, retry: 1 } },
@@ -8,7 +9,9 @@ export const queryClient = new QueryClient({
 const Provider = ({ children }: { children: React.ReactNode }) => {
     return (
         <QueryClientProvider client={queryClient}>
-            {children}
+            <LazyMotion features={domAnimation} strict>
+                {children}
+            </LazyMotion>
         </QueryClientProvider>
     );
 };
