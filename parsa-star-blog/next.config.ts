@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
                 permanent: true,
             },
             {
+                source: "/signin",
+                destination: "/auth/signin",
+                permanent: true,
+            },
+            {
+                source: "/signup",
+                destination: "/auth/signup",
+                permanent: true,
+            },
+            {
                 source: "/login",
                 destination: "/auth/signin",
                 permanent: true,
