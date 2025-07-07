@@ -10,7 +10,7 @@ type RowTextInputsProps<T> = {
     Rows: TRows<T>;
 };
 
-const RowTextInputs = <T extends Record<string, any>>({
+const RowTextInputs = <T extends Record<string, any>>({  // eslint-disable-line @typescript-eslint/no-explicit-any 
     Rows,
 }: RowTextInputsProps<T>) => {
     const {

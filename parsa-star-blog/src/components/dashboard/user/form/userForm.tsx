@@ -175,11 +175,10 @@ const UserForm = ({
                     toast.error(res.message);
                     return;
                 }
-
                 await queryClient.invalidateQueries({
                     queryKey: [queryKeys.users.getList],
-                }),
-                    toast.success(res.message);
+                });
+                toast.success(res.message);
             } catch (error) {
                 console.log("error : ", error);
                 toast.error("something went wrong");

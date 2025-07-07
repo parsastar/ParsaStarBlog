@@ -72,8 +72,12 @@ export default function ConfirmDialog() {
         >
             <DialogContent className="!font-roboto flex-col gap-10">
                 <DialogHeader>
-                    <DialogTitle>{title}</DialogTitle>
-                    <DialogDescription>{description}</DialogDescription>
+                    <DialogTitle>
+                        {title || "Dialog Title for confirmation "}
+                    </DialogTitle>
+                    <DialogDescription>
+                        {description || "Dialog Description for confirmation "}
+                    </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="flex sm:justify-start bg-slate-50">
                     <DialogClose asChild>

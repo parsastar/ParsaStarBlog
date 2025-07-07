@@ -1,23 +1,39 @@
-import StatusCodes from "@/server/lib/constants";
-import { Fields, Files } from "formidable";
-import IncomingForm from "formidable/Formidable";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import {
+    IncomingForm,
+    Files,
+    Fields,
+    File as FormidableFile,
+} from "formidable";
+import { readFile } from "fs/promises";
 
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
+import StatusCodes from "@/server/lib/constants";
+import {
+    ImageDeleteAction,
+    imageUploadAction,
+} from "@/server/actions/files/Image";
+
+export const dynamic = "force-dynamic";
+
+// Convert formidable file to browser-like File
+async function toBrowserFile(file: FormidableFile): Promise<File> {
+    const buffer = await readFile(file.filepath);
+    return new File([buffer], file.originalFilename ?? "upload.jpg", {
+        type: file.mimetype ?? "image/jpeg",
+    });
+}
 
 export async function POST(req: NextRequest) {
     const form = new IncomingForm({
         multiples: false,
         keepExtensions: true,
-        uploadDir: "/tmp", // Use system tmp folder or make sure this exists
     });
+
     try {
         const { files } = await new Promise<{ fields: Fields; files: Files }>(
             (resolve, reject) => {
+                // Required cast: Next.js Request doesn't expose IncomingMessage directly
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 form.parse(req as any, (err, fields, files) => {
                     if (err) return reject(err);
                     resolve({ fields, files });
@@ -29,16 +45,27 @@ export async function POST(req: NextRequest) {
         const file = Array.isArray(imageFile) ? imageFile[0] : imageFile;
 
         if (!file || !("filepath" in file)) {
-            return {
+            return Response.json({
                 message: "No image provided",
                 status: StatusCodes.badRequest,
-            };
+            });
         }
+
+        const browserFile = await toBrowserFile(file);
+        const result = await imageUploadAction(browserFile);
+
+        return Response.json(result);
     } catch (error) {
         console.error("[Cloudinary Upload Error]", error);
-        return {
+        return Response.json({
             message: "Failed to upload image",
             status: StatusCodes.internalServerError,
-        };
+        });
     }
+}
+
+export async function DELETE(req: NextRequest) {
+    const { url } = (await req.json()) as { url: string };
+    const res = await ImageDeleteAction(url);
+    return NextResponse.json(res);
 }

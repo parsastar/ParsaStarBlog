@@ -59,7 +59,7 @@ const DashboardFilters = ({
         register,
         watch,
         reset,
-        formState: { errors },
+
         handleSubmit,
         setValue,
     } = useForm<TDashboardSchema>({
@@ -160,7 +160,7 @@ const DashboardFilters = ({
                         <SelectContent className="w-fit font-roboto text-sm font-medium ">
                             {sortArray.map((value) => (
                                 <SelectItem key={value} value={value}>
-                                    {value == "asc" ? "Newest" : "Oldest"}
+                                    {value == "asc" ? "Oldest" : "Newest"}
                                 </SelectItem>
                             ))}
                         </SelectContent>

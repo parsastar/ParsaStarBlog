@@ -32,7 +32,7 @@ export const FormCreator = <T extends ZodTypeAny>({
 
     const {
         handleSubmit,
-        formState: { isSubmitting, errors },
+        formState: { isSubmitting },
     } = methods;
 
     // Debug: see what values are being passed

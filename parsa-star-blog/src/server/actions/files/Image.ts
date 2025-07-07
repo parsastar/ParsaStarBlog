@@ -30,7 +30,7 @@ export async function imageUploadAction(file: File) {
         }>((resolve, reject) => {
             const uploadStream = cloudinary.uploader.upload_stream(
                 {
-                    folder: "your-folder-name", // optional
+                    folder: "parsa-star-blog", // optional
                 },
                 (error, result) => {
                     if (error || !result) return reject(error);

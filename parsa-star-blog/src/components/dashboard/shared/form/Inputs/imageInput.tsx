@@ -5,7 +5,8 @@ import { Path, PathValue, useFormContext } from "react-hook-form";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Image as ImageIcon } from "lucide-react";
-const ImageInput = <T extends Record<string, any>>({
+
+const ImageInput = <T extends Record<string, any>>({  // eslint-disable-line @typescript-eslint/no-explicit-any
     InputClassName,
     formKey,
     imageFile,
@@ -21,7 +22,7 @@ const ImageInput = <T extends Record<string, any>>({
 
     const handleDelete = () => {
         setValue(formKey, null as PathValue<T, Path<T>>);
-        setValue(imageFile, null as any); // if file is File | null
+        setValue(imageFile, null as PathValue<T, Path<T>>); // if file is File | null
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

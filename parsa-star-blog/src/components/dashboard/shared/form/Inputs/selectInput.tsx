@@ -9,7 +9,7 @@ import React from "react";
 import { Controller, Path, useFormContext } from "react-hook-form";
 import { TDashboardInputProps } from "@/components/dashboard/dashboardTypes";
 
-const SelectInput = <T extends Record<string, any>>({
+const SelectInput = <T extends Record<string, any>>({ // eslint-disable-line @typescript-eslint/no-explicit-any 
     formKey,
     values,
     InputClassName,

@@ -3,8 +3,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Eye, Pen, Trash2, User } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { UserDataListProps } from "./users";
+
 import { useRouter } from "next/navigation";
+import { UserDataListProps } from "./usersList";
 
 const UserCards = (props: UserDataListProps) => {
     const router = useRouter();

@@ -7,7 +7,7 @@ import TextAreaInput from "./Inputs/textAreaInput";
 import SelectInput from "./Inputs/selectInput";
 import ImageInput from "./Inputs/imageInput";
 
-const DashboardInputs = <T extends Record<string, any>>(
+const DashboardInputs = <T extends Record<string, any>>( // eslint-disable-line @typescript-eslint/no-explicit-any
     props: TDashboardInputs<T>
 ) => {
     const { label, wrapperClass, input } = props;

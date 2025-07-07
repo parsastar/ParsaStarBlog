@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-const TextInput = <T extends Record<string, any>>({
+const TextInput = <T extends Record<string, any>>({  // eslint-disable-line @typescript-eslint/no-explicit-any 
     InputClassName,
     formKey,
     placeHolder,
