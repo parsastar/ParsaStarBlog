@@ -2,6 +2,7 @@ import * as t from "drizzle-orm/pg-core";
 import { userT } from "../user/user";
 import { categoryT } from "./category";
 import { relations } from "drizzle-orm";
+import { generateIndexName } from "@/db/helper";
 
 export const userCategoryT = t.pgTable(
     "user_category",
@@ -17,7 +18,9 @@ export const userCategoryT = t.pgTable(
     },
     (table) => [
         t.primaryKey({ columns: [table.user_id, table.category_id] }),
-        t.index("category_index").on(table.category_id),
+        t
+            .index(generateIndexName("user_category", "category_id"))
+            .on(table.category_id),
     ]
 );
 

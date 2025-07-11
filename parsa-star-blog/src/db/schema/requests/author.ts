@@ -1,6 +1,6 @@
 import * as t from "drizzle-orm/pg-core";
 import { userT } from "../user/user";
-import { defaultTimeStamps } from "@/db/helper";
+import { defaultTimeStamps, generateIndexName } from "@/db/helper";
 import { RequestStateEnum } from "./shared";
 import { relations } from "drizzle-orm";
 
@@ -21,8 +21,10 @@ export const AuthorRequestsT = t.pgTable(
         ...defaultTimeStamps,
     },
     (table) => [
-        t.index("moderator_id_index").on(table.moderator_id),
-        t.index("state_index").on(table.state),
+        t
+            .index(generateIndexName("author", "moderator_id"))
+            .on(table.moderator_id),
+        t.index(generateIndexName("author", "state")).on(table.state),
     ]
 );
 

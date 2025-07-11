@@ -1,5 +1,5 @@
 import * as t from "drizzle-orm/pg-core";
-import { defaultTimeStamps } from "../../helper";
+import { defaultTimeStamps, generateIndexName } from "../../helper";
 import { relations } from "drizzle-orm";
 import { blogLikesT } from "./blogLikes";
 import { BlogCommentsT } from "./blogComments";
@@ -26,8 +26,8 @@ export const blogT = t.pgTable(
         ...defaultTimeStamps,
     },
     (table) => [
-        t.index("user_id_index").on(table.user_id),
-        t.index("title_index").on(table.title),
+        t.index(generateIndexName("blog", "user_id")).on(table.user_id),
+        t.index(generateIndexName("blog", "title")).on(table.title),
     ]
 );
 

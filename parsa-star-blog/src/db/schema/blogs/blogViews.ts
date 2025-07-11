@@ -2,6 +2,7 @@ import * as t from "drizzle-orm/pg-core";
 import { userT } from "../user/user";
 import { blogT } from "./blog";
 import { relations } from "drizzle-orm";
+import { generateIndexName } from "@/db/helper";
 
 export const blogViewsT = t.pgTable(
     "blog_views",
@@ -16,7 +17,9 @@ export const blogViewsT = t.pgTable(
         user_agent: t.varchar({ length: 500 }), // optional, for bot detection
         viewed_at: t.timestamp({ withTimezone: true }).defaultNow(),
     },
-    (table) => [t.index("blog_id_index").on(table.blog_id)]
+    (table) => [
+        t.index(generateIndexName("blog_views", "blog_id")).on(table.blog_id),
+    ]
 );
 
 export const blogViewsTableRelations = relations(blogViewsT, ({ one }) => ({

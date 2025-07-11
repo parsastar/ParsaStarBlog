@@ -1,4 +1,4 @@
-import { defaultTimeStamps } from "@/db/helper";
+import { defaultTimeStamps, generateIndexName } from "@/db/helper";
 import { relations } from "drizzle-orm";
 import * as t from "drizzle-orm/pg-core";
 import { userT } from "../user/user";
@@ -25,9 +25,9 @@ export const BlogCommentsT = t.pgTable(
         ...defaultTimeStamps,
     },
     (table) => [
-        t.index("user_id_index").on(table.user_id),
-        t.index("blog_id_index").on(table.blog_id),
-        t.index("reply_to_id_index").on(table.reply_to_id),
+        t.index(generateIndexName("blog_comments", "user_id")).on(table.user_id),
+        t.index(generateIndexName("blog_comments", "blog_id")).on(table.blog_id),
+        t.index(generateIndexName("blog_comments", "reply_to_id")).on(table.reply_to_id),
     ]
 );
 

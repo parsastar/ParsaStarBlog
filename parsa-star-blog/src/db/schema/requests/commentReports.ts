@@ -2,12 +2,12 @@ import * as t from "drizzle-orm/pg-core";
 
 import { userT } from "../user/user";
 import { ReportReasonsEnum, RequestStateEnum } from "./shared";
-import { defaultTimeStamps } from "@/db/helper";
+import { defaultTimeStamps, generateIndexName } from "@/db/helper";
 import { relations } from "drizzle-orm";
 import { BlogCommentsT } from "../blogs/blogComments";
 
 export const CommentReportT = t.pgTable(
-    "report_blog",
+    "comment_report",
     {
         id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
         comment_id: t
@@ -28,9 +28,9 @@ export const CommentReportT = t.pgTable(
         ...defaultTimeStamps,
     },
     (table) => [
-        t.index("report_reasons_index").on(table.report_reasons),
-        t.index("status_index").on(table.status),
-        t.index("moderator_id_index").on(table.moderator_id),
+        t.index(generateIndexName("comment","reason")).on(table.report_reasons),
+        t.index(generateIndexName("comment","state")).on(table.status),
+        t.index(generateIndexName("comment","moderator_id")).on(table.moderator_id),
     ]
 );
 

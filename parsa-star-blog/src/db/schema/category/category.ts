@@ -1,4 +1,4 @@
-import { defaultTimeStamps, lower } from "@/db/helper";
+import { defaultTimeStamps, generateIndexName, lower } from "@/db/helper";
 import { relations } from "drizzle-orm";
 import * as t from "drizzle-orm/pg-core";
 import { userCategoryT } from "./userCategories";
@@ -17,7 +17,9 @@ export const categoryT = t.pgTable(
         ...defaultTimeStamps,
     },
     (table) => [
-        t.uniqueIndex("category_name_unique_index").on(lower(table.name)),
+        t
+            .uniqueIndex(generateIndexName("category", "name"))
+            .on(lower(table.name)),
     ]
 );
 

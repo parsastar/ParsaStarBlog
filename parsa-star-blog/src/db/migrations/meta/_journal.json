@@ -22,6 +22,13 @@
       "when": 1750976590721,
       "tag": "0002_zippy_shaman",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1752223228360,
+      "tag": "0003_fair_spencer_smythe",
+      "breakpoints": true
     }
   ]
 }
