@@ -52,7 +52,7 @@ export const DashboardPagesDefaults = {
         startPage: 1,
         pageSize: 20,
         search: undefined,
-        sorting: "asc",
+        sorting: "dsc",
         role: null as TUserRoles | null,
     },
 } as const;
