@@ -1,5 +1,13 @@
-export type TUserRoles = "user" | "author" | "admin";
 export const userRolesArray = ["user", "author", "admin"] as const;
+export type TUserRoles = (typeof userRolesArray)[number];
+export const AccountStatusArray = [
+    "ok",
+    "restricted",
+    "banned",
+    "suspended",
+] as const;
+export type TAccountStatus = (typeof userRolesArray)[number];
+
 export type TUserSocials = {
     instagram?: string | null;
     linkedin?: string | null;

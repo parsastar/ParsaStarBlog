@@ -1,7 +1,7 @@
 import { defaultTimeStamps } from "@/db/helper";
 import { relations } from "drizzle-orm";
 import * as t from "drizzle-orm/pg-core";
-import { userT } from "../user";
+import { userT } from "../user/user";
 import { blogT } from "./blog";
 
 export const BlogCommentsT = t.pgTable(
@@ -43,9 +43,12 @@ export const BlogCommentsTableRelations = relations(
             references: [userT.id],
         }),
         parent: one(BlogCommentsT, {
+            relationName: "commentThread",
             fields: [BlogCommentsT.reply_to_id],
             references: [BlogCommentsT.id],
         }),
-        replies: many(BlogCommentsT),
+        replies: many(BlogCommentsT, {
+            relationName: "commentThread",
+        }),
     })
 );

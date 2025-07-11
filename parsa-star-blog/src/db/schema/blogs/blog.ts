@@ -3,7 +3,11 @@ import { defaultTimeStamps } from "../../helper";
 import { relations } from "drizzle-orm";
 import { blogLikesT } from "./blogLikes";
 import { BlogCommentsT } from "./blogComments";
-import { userT } from "../user";
+import { userT } from "../user/user";
+import { blogCategoryT } from "../category/blogCategoies";
+import { ReadLaterT } from "../user/ReadLater";
+import { BlogReportT } from "../requests/blogReport";
+import { blogViewsT } from "./blogViews";
 
 type TSubSection = { title: string; description: string };
 
@@ -29,7 +33,24 @@ export const blogT = t.pgTable(
 
 /// Relations for blogs
 export const blogsTableRelations = relations(blogT, ({ many, one }) => ({
+    /// for user table
     user: one(userT, { fields: [blogT.user_id], references: [userT.id] }),
+
+    /// for blog comment table
     comments: many(BlogCommentsT),
+
+    /// for blog likes table
     likes: many(blogLikesT),
+
+    /// for blog category table
+    category: many(blogCategoryT),
+
+    /// for read Later Table
+    ReadLaterBlog: many(ReadLaterT),
+
+    /// for blog report table
+    reportedBlog: many(BlogReportT),
+
+    /// for blogViews
+    viewedBlog: many(blogViewsT),
 }));

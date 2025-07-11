@@ -3,6 +3,6 @@ export {
     BlogCommentsT,
     BlogCommentsTableRelations,
 } from "./blogs/blogComments";
-export { userT, userTableRelations , userRoles } from "./user";
+export { userT, userTableRelations, userRoles } from "./user/user";
 
-export { blogLikesT, BlogLikesRelations , } from "./blogs/blogLikes";
+export { blogLikesT, BlogLikesRelations } from "./blogs/blogLikes";

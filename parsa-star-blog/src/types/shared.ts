@@ -6,10 +6,3 @@ export type TMultiPages = TServerResponse & {
     totalPages: number;
     currentPage: number;
 };
-
-
-
-
-
-
-
