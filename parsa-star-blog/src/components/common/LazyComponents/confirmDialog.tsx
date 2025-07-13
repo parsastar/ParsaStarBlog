@@ -55,6 +55,7 @@ export default function ConfirmDialog() {
                             queryKey: queryKeys,
                         });
                     }
+                    setClose();
                 },
             });
         } catch (error) {

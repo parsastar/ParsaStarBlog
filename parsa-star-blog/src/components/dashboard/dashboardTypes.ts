@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import { Path } from "react-hook-form";
 
 type TBaseInput<T> = {
@@ -16,7 +16,7 @@ type TTextAreaInput<T> = TBaseInput<T> & {
 };
 type TSelectInput<T> = TBaseInput<T> & {
     type: "select";
-    values: { label: string; value: string }[];
+    values: { label: string | ReactElement<any, any>; value: string }[];
     Icon?: LucideIcon;
 };
 

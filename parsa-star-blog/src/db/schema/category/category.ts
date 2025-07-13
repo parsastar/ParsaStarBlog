@@ -3,7 +3,7 @@ import { relations } from "drizzle-orm";
 import * as t from "drizzle-orm/pg-core";
 import { userCategoryT } from "./userCategories";
 import { blogCategoryT } from "./blogCategoies";
-
+    
 export const categoryT = t.pgTable(
     "category",
     {

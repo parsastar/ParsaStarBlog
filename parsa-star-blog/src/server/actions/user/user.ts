@@ -125,7 +125,8 @@ export const postUserAction = async (
 };
 
 export const putUserAction = async (
-    payload: TPutUserPayload
+    payload: TPutUserPayload,
+    user_id: number
 ): Promise<TServerResponse> => {
     const { success, error, data } =
         userServerSchema.admin.update.safeParse(payload);
@@ -134,10 +135,10 @@ export const putUserAction = async (
         return ShortResponses.schemaError(error);
     }
     try {
-        const { email, id } = data;
+        const { email } = data;
         const user = await db.query.userT.findFirst({
             columns: { email: true },
-            where: eq(userT.id, id),
+            where: eq(userT.id, user_id),
         });
         if (!user) {
             return ShortResponses.notFoundError(
@@ -155,11 +156,11 @@ export const putUserAction = async (
             };
         }
 
-        const { id: _id, ...changingData } = data;
+        const { ...changingData } = data;
         await db
             .update(userT)
             .set({ ...changingData })
-            .where(eq(userT.id, id));
+            .where(eq(userT.id, user_id));
 
         return {
             status: StatusCodes.success,

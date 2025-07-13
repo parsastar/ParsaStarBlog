@@ -6,12 +6,13 @@ import { IdCard, TableProperties } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import UsersTable from "./userTable";
+
 import UserCards from "./UserCards";
 import { queryKeys } from "@/constant/querykeys";
 import { useUserDrawerStore } from "@/zustand/userDrawerStore";
+import UsersTable from "./userTable";
 
-export type UserDataListProps = {
+export type TUserDataListProps = {
     pageSize: number;
     status: "error" | "success" | "pending";
     users?: TGetUsers["users"];
@@ -30,9 +31,9 @@ const UsersList = ({
     status: "error" | "success" | "pending";
     users?: TGetUsers["users"];
 }) => {
-    type TDataView = "Table" | "Card";
-    const [viewMode, setViewMode] = useState<TDataView>("Table");
-    const DataViews = ["Table", "Card "] as TDataView[];
+    const DataViewModes = ["Table", "Card "] as const;
+    const [viewMode, setViewMode] =
+        useState<(typeof DataViewModes)[number]>("Table");
     const router = useRouter();
     const pathname = usePathname();
     const handleView = (user: TUserWithoutPassword) => {
@@ -59,7 +60,7 @@ const UsersList = ({
             action: () => deleteUserAction(user.id),
         });
     };
-    const actions: UserDataListProps["actions"] = {
+    const actions: TUserDataListProps["actions"] = {
         Delete: handleDelete,
         View: handleView,
         Edit: handleEdit,
@@ -68,7 +69,7 @@ const UsersList = ({
         <div className="w-full flex flex-col gap-10">
             <div className="w-full flex items-center bg-secondary-500 p-2.5  rounded-full">
                 <div className="flex w-full gap-5   items-center">
-                    {DataViews.map((mode) => (
+                    {DataViewModes.map((mode) => (
                         <button
                             onClick={() => setViewMode(mode)}
                             key={mode}

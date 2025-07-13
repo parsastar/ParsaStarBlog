@@ -5,6 +5,7 @@ import {
     Users,
     BadgeCheck,
     CircleUser,
+    Boxes,
 } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
@@ -35,6 +36,12 @@ export const dashboardPages: TDashboardPages = [
         roles: ["admin", "author", "user"],
         href: "/dashboard/blogs",
         icon: SquareLibrary,
+    },
+    {
+        name: "Categories",
+        roles: ["admin"],
+        href: "/dashboard/categories",
+        icon: Boxes,
     },
     {
         name: "getAuthor",

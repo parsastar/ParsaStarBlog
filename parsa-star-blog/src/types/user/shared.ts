@@ -65,7 +65,6 @@ const infoField = {
 const roleField = { role: z.enum(userRolesArray) };
 
 const userBase = {
-    id: z.number(),
     ...nameFields,
     ...emailField,
     ...phoneField,

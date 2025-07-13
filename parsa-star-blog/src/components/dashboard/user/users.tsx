@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import DashboardFilters from "../shared/dashboardfilters";
 import { PaginationList } from "@/components/common/paginationList";
 import { TUserRoles, userRolesArray } from "@/types/user/shared";
-import UsersList from "./usersList";
+import UsersList from "./list/usersList";
 
 const Users = () => {
     const searchParams = useSearchParams();

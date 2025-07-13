@@ -42,6 +42,6 @@ export async function PUT(
 ) {
     const { userId } = await params;
     const payload: TPutUserPayload = await req.json();
-    const res = await putUserAction({ ...payload, id: Number(userId) });
+    const res = await putUserAction({ ...payload }, Number(userId));
     return NextResponse.json(res);
 }

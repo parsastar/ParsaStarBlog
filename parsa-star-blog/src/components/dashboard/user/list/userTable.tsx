@@ -11,10 +11,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Eye, Pen, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { UserDataListProps } from "./usersList";
+import { TUserDataListProps } from "./usersList";
 
 
-const UsersTable = (props: UserDataListProps) => {
+const UsersTable = (props: TUserDataListProps) => {
     const router = useRouter();
     const { status, pageSize, actions } = props;
     const tableCols = [

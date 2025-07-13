@@ -34,11 +34,10 @@ const editUserSchema = z
     })
     .omit({ password: true });
 
-const postUserSchema = z
-    .object({
-        ...userBase,
-    })
-    .omit({ id: true });
+const postUserSchema = z.object({
+    ...userBase,
+});
+
 export const userServerSchema = {
     auth: {
         signUp,

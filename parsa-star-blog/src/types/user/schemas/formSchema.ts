@@ -1,12 +1,7 @@
 import { z } from "zod";
 import { SharedUserSchema } from "../shared";
-const MAX_FILE_SIZE = 5000000;
-const ACCEPTED_IMAGE_TYPES = [
-    "image/jpeg",
-    "image/jpg",
-    "image/png",
-    "image/webp",
-];
+import { imageFileSchema } from "@/types/shared";
+
 const {
     emailField,
     nameFields,
@@ -81,24 +76,10 @@ const changePassword = z
         }
     });
 
-const imageFileSchema = z.object({
-    imageFile: z
-        .any()
-        .refine(
-            (file) => file?.size <= MAX_FILE_SIZE,
-            "maximum file size should be  5mb"
-        )
-        .refine(
-            (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-            "accepted file types are :  jpg/jpeg/png/webp"
-        )
-        .nullable()
-        .optional(),
-});
 // 🛠 Update user schema — safely omit repeatPassword
 const CreateUserBase = z
-    .object({ ...userBase, ...imageFileSchema.shape })
-    .omit({ password: true, id: true });
+    .object({ ...userBase, ...imageFileSchema })
+    .omit({ password: true });
 const UpDateUserSchema = CreateUserBase;
 const postUserSchema = CreateUserBase.extend({ ...passwordField });
 

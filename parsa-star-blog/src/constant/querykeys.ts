@@ -6,4 +6,11 @@ export const queryKeys = {
         put: "putUser",
         getList: "getUsers",
     },
+    categories: {
+        /// this is for the admin users
+        get: "getCategory",
+        post: "postCategory",
+        put: "putCategory",
+        getList: "getCategories",
+    },
 };

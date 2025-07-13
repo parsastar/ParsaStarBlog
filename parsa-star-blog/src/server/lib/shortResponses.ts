@@ -20,9 +20,15 @@ const unAuthorized = () => ({
     status: StatusCodes.unauthorized,
     message: "unAuthorized , please sign in to your account ",
 });
+
+const wrongInput = (message?: string) => ({
+    status: StatusCodes.badRequest,
+    message: message || "Data Input is Wrong ",
+});
 export const ShortResponses = {
     unAuthorized,
     notFoundError,
+    wrongInput,
     schemaError: severSchemaErrorResponse,
     severError,
 };

@@ -8,21 +8,23 @@ import {
 } from "@/components/ui/drawer";
 
 import { Button } from "@/components/ui/button";
-import { useUserDrawerStore } from "@/zustand/userDrawerStore";
-import UserForm from "./userForm";
-import { X } from "lucide-react";
 
-const UserDrawer = () => {
-    const { isOpen, setClose, selectedUser } = useUserDrawerStore();
+import { X } from "lucide-react";
+import { useCategoryDrawerStore } from "@/zustand/categoryDrawerStore";
+import CategoryForm from "./categoryForm";
+
+const CategoryDrawer = () => {
+    const { isOpen, setClose, selectedCategory, ParentId } =
+        useCategoryDrawerStore();
     return (
         <Drawer open={isOpen} onOpenChange={isOpen ? setClose : undefined}>
             <DrawerContent onEscapeKeyDown={setClose}>
                 <div className="container  mx-auto flex flex-col gap-5">
                     <DrawerHeader className="w-full font-roboto flex items-center justify-between p-0">
                         <DrawerTitle>
-                            {selectedUser
-                                ? `Edit ${selectedUser.first_name}`
-                                : "Create New User"}
+                            {selectedCategory
+                                ? `Edit ${selectedCategory.name}`
+                                : "Create New Category"}
                         </DrawerTitle>
                         <Button
                             aria-label="close form"
@@ -37,7 +39,10 @@ const UserDrawer = () => {
                         data-lenis-prevent
                         className="max-h-[75svh] px-1 pb-10 overflow-y-auto overflow-x-visible"
                     >
-                        <UserForm selectedUser={selectedUser} />
+                        <CategoryForm
+                            ParentId={ParentId}
+                            selectedCategory={selectedCategory}
+                        />
                     </div>
                 </div>
             </DrawerContent>
@@ -45,4 +50,4 @@ const UserDrawer = () => {
     );
 };
 
-export default UserDrawer;
+export default CategoryDrawer;

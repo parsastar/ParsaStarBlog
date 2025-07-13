@@ -5,7 +5,7 @@ import { userServerSchema } from "./schemas/serverSchema";
 const { profile: _profile, auth: _auth, admin: _admin } = userServerSchema; // we use server zod validators to create the payload type of user actions
 
 // actual user type that we use for the client
-export type TUser = z.infer<typeof _admin.update>;
+export type TUser = z.infer<typeof _admin.update> & { id: number };
 export type TUserWithoutPassword = Omit<TUser, "password">;
 // server responses types
 export type TGetUser = TServerResponse & {

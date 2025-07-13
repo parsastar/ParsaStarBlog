@@ -5,9 +5,10 @@ import Image from "next/image";
 import React from "react";
 
 import { useRouter } from "next/navigation";
-import { UserDataListProps } from "./usersList";
+import { TUserDataListProps } from "./usersList";
 
-const UserCards = (props: UserDataListProps) => {
+
+const UserCards = (props: TUserDataListProps) => {
     const router = useRouter();
     const { status, pageSize, actions } = props;
 

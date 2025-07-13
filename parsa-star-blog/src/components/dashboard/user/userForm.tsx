@@ -12,9 +12,9 @@ import { queryClient } from "@/app/provider";
 import { queryKeys } from "@/constant/querykeys";
 import { userRolesArray } from "@/types/user/shared";
 import { TUserWithoutPassword } from "@/types/user/api";
-import { TDashboardInputs } from "../../dashboardTypes";
+import { TDashboardInputs } from "../dashboardTypes";
 import { ImageUploadHandler } from "@/lib/imageUploadHandler";
-import { FormCreator } from "../../shared/form/formCreator";
+import { FormCreator } from "../shared/form/formCreator";
 
 const UserForm = ({
     selectedUser,
@@ -105,10 +105,12 @@ const UserForm = ({
                     data[image.filePath] = null;
                 });
                 /// handling imageFiles ends
-                const res = await putUserAction({
-                    ...data,
-                    id: selectedUser.id,
-                });
+                const res = await putUserAction(
+                    {
+                        ...data,
+                    },
+                    selectedUser.id
+                );
 
                 if (res.status !== StatusCodes.success) {
                     console.log(res.message);

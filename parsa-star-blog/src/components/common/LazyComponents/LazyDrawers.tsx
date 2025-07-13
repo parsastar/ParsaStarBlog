@@ -7,6 +7,16 @@ const UserDrawer = dynamic(
     }
 );
 
+const CategoryDrawer = dynamic(
+    () => import("@/components/dashboard/categories/categoryDrawer"),
+    {
+        ssr: false,
+    }
+);
 export const LazyUserDrawer = () => {
     return <UserDrawer />;
+};
+
+export const LazyCategoryDrawer = () => {
+    return <CategoryDrawer />;
 };
