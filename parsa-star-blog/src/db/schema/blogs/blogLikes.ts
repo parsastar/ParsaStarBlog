@@ -7,20 +7,22 @@ import { blogT } from "./blog";
 export const blogLikesT = t.pgTable(
     "blog_likes",
     {
-        user_id: t
+        userId: t
             .integer()
             .notNull()
             .references(() => userT.id, { onDelete: "cascade" }),
-        blog_id: t
+        blogId: t
             .integer()
             .notNull()
             .references(() => blogT.id, { onDelete: "cascade" }),
         ...defaultTimeStamps,
     },
-    (table) => [t.primaryKey({ columns: [table.blog_id, table.user_id] })]
+    (table) => [t.primaryKey({ columns: [table.blogId, table.userId] })]
 );
 
 export const BlogLikesRelations = relations(blogLikesT, ({ one }) => ({
-    user: one(userT, { fields: [blogLikesT.user_id], references: [userT.id] }),
-    blog: one(blogT, { fields: [blogLikesT.blog_id], references: [blogT.id] }),
+    user: one(userT, { fields: [blogLikesT.userId], references: [userT.id] }),
+    blog: one(blogT, { fields: [blogLikesT.blogId], references: [blogT.id] }),
 }));
+
+

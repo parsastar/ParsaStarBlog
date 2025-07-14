@@ -5,7 +5,7 @@ import {
     TFetchBlog,
     TFetchBlogs,
     TStructuredBlogs,
-} from "@/types/blogs/api";
+} from "@/types/api/blog";
 
 export const BlogsDataTransfer = ({
     blogs,

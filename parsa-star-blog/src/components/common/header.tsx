@@ -54,7 +54,6 @@ const HeaderBackground = () => {
                     <m.line
                         key={index}
                         strokeDasharray="2718 2718"
-                        vectorEffect={"non-scaling-stroke"}
                         initial={{ strokeDashoffset: 2718 }}
                         animate={{
                             strokeDashoffset: 0,

@@ -19,14 +19,14 @@ const AnimatedLine = ({
         { stiffness: 80, damping }
     );
     return (
-        <div className="flex relative pointer-events-none   w-full h-fit flex-col items-center  gap-0">
+        <div className="flex relative pointer-events-none  w-full h-fit flex-col items-center  gap-0">
             <div
                 className="h-[20vh] absolute top-0 z-[-10 ]  w-full"
                 ref={container}
             />
             <m.div
                 style={{ scaleX: LineScaleX }}
-                className="w-[calc(100%)] origin-center mx-auto h-[1px] bg-primary-500 z-[4] relative"
+                className="w-[calc(100%-1px)] origin-center mx-auto h-[1px] bg-primary-500 z-[4] relative"
             />
         </div>
     );
