@@ -7,6 +7,7 @@ import { useCategoryDrawerStore } from "@/zustand/categoryDrawerStore";
 import { useConfirmDialogStore } from "@/zustand/confirmDialogStore";
 import { queryKeys } from "@/constant/querykeys";
 import { DeleteCategoryAction } from "@/server/actions/category/category";
+import CategoryTable from "./categoryTable";
 
 export type TCategoryListProps = {
     categories?: TShapedCategory[];
@@ -75,7 +76,7 @@ const CategoryList = ({ categories }: { categories?: TShapedCategory[] }) => {
             </div>
 
             {viewMode == "Table" ? (
-                <CategoryCards actions={actions} categories={categories} />
+                <CategoryTable actions={actions} categories={categories} />
             ) : (
                 <CategoryCards actions={actions} categories={categories} />
             )}

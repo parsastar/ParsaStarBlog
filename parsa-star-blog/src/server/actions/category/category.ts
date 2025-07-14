@@ -58,13 +58,23 @@ export const putCategoryAction = async (
         return ShortResponses.schemaError(error);
     }
     try {
-        const existCategory = await db.query.categoryT.findFirst({
-            where: eq(categoryT.name, data.name),
+        const selectedCategory = await db.query.categoryT.findFirst({
+            where: eq(categoryT.id, category_id),
         });
-        if (existCategory) {
-            return ShortResponses.wrongInput(
-                "category with this name already exists "
+        if (!selectedCategory) {
+            return ShortResponses.notFoundError(
+                "category with the Id given doesn't exists "
             );
+        }
+        if (selectedCategory.name !== data.name) {
+            const existCategory = await db.query.categoryT.findFirst({
+                where: eq(categoryT.name, data.name),
+            });
+            if (existCategory) {
+                return ShortResponses.wrongInput(
+                    "category with this name already exists "
+                );
+            }
         }
         await db
             .update(categoryT)
