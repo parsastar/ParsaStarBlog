@@ -16,7 +16,7 @@ type TTextAreaInput<T> = TBaseInput<T> & {
 };
 type TSelectInput<T> = TBaseInput<T> & {
     type: "select";
-    values: { label: string | ReactElement<any, any>; value: string }[];
+    values: { label: string | ReactElement; value: string }[];
     Icon?: LucideIcon;
 };
 

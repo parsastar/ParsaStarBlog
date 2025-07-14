@@ -40,7 +40,7 @@ export const shapeCategories = (categories: TCategory[]) => {
 
 export const findCategoryIcon = (
     selectedIcon: TCategoryIconOptions
-): ReactElement<any, any> => {
+): ReactElement => {
     switch (selectedIcon) {
         case "Education":
             return <BookOpen />;

@@ -18,7 +18,6 @@ export type TCategoryListProps = {
     };
 };
 const CategoryList = ({ categories }: { categories?: TShapedCategory[] }) => {
-    console.log("categories : ", categories);
     const { setContent } = useCategoryDrawerStore();
 
     const DataViewModes = ["Table", "Card "] as const;
