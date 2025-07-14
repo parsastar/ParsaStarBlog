@@ -8,9 +8,10 @@ import {
 } from "@/components/ui/drawer";
 
 import { Button } from "@/components/ui/button";
-import { useUserDrawerStore } from "@/zustand/userDrawerStore";
+
 import UserForm from "./userForm";
 import { X } from "lucide-react";
+import { useUserDrawerStore } from "@/zustand/userDrawerStore";
 
 const UserDrawer = () => {
     const { isOpen, setClose, selectedUser } = useUserDrawerStore();

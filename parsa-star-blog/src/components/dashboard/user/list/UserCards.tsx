@@ -151,7 +151,7 @@ const UserCardsMock = ({ pageSize }: { pageSize: number }) => {
                                 <Skeleton className="w-3/5 h-5" />
                             </div>
                             <div className="flex gap-1 text-white">
-                                <Skeleton className="size-5 as" />
+                                <Skeleton className="size-5 " />
                                 <Skeleton className="size-5" />
                                 <Skeleton className="size-5" />
                             </div>

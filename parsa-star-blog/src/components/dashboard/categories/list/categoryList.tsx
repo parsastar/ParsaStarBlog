@@ -13,10 +13,13 @@ export type TCategoryListProps = {
     actions: {
         Delete: (category: TCategory) => void;
         Edit: (category: TCategory) => void;
+        AddSubCat: (category: TCategory) => void;
     };
 };
 const CategoryList = ({ categories }: { categories?: TShapedCategory[] }) => {
     console.log("categories : ", categories);
+    const { setContent } = useCategoryDrawerStore();
+
     const DataViewModes = ["Table", "Card "] as const;
     const [viewMode, setViewMode] =
         useState<(typeof DataViewModes)[number]>("Table");
@@ -38,13 +41,18 @@ const CategoryList = ({ categories }: { categories?: TShapedCategory[] }) => {
             action: () => DeleteCategoryAction(category.id),
         });
     };
+
+    const AddSubCategory = (category: TCategory) => {
+        setContent(undefined, category.id);
+    };
     const actions: TCategoryListProps["actions"] = {
         Delete: handleDelete,
         Edit: handleEdit,
+        AddSubCat: AddSubCategory,
     };
     return (
         <div className="w-full flex flex-col gap-10">
-            <div className="w-full flex items-center bg-secondary-500 p-2.5  rounded-full">
+            <div className="w-full flex items-center bg-secondary-500 p-2.5   rounded-full">
                 <div className="flex w-full gap-5   items-center">
                     {DataViewModes.map((mode) => (
                         <button

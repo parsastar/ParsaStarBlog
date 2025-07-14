@@ -19,6 +19,14 @@ export const postCategoryAction = async (payload: TPostCategoryPayload) => {
     if (!success) {
         return ShortResponses.schemaError(error);
     }
+    const existCategory = await db.query.categoryT.findFirst({
+        where: eq(categoryT.name, data.name),
+    });
+    if (existCategory) {
+        return ShortResponses.wrongInput(
+            "category with this name already exists "
+        );
+    }
     if (data.parent_id) {
         const parentCategory = await db.query.categoryT.findFirst({
             where: eq(categoryT.id, data.parent_id),
@@ -50,6 +58,14 @@ export const putCategoryAction = async (
         return ShortResponses.schemaError(error);
     }
     try {
+        const existCategory = await db.query.categoryT.findFirst({
+            where: eq(categoryT.name, data.name),
+        });
+        if (existCategory) {
+            return ShortResponses.wrongInput(
+                "category with this name already exists "
+            );
+        }
         await db
             .update(categoryT)
             .set(data)
@@ -83,6 +99,7 @@ export const DeleteCategoryAction = async (category_id: number) => {
 export const getCategories = async () => {
     try {
         const categories = await db.query.categoryT.findMany();
+
         const shapedCategories = shapeCategories(categories as TCategory[]);
         return {
             status: StatusCodes.success,

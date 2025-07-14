@@ -100,7 +100,6 @@ const CategoryForm = ({
                 : postCategoryAction({ ...data }));
 
             if (res.status !== StatusCodes.success) {
-                console.log(res.message);
                 toast.error(res.message);
                 return;
             }
