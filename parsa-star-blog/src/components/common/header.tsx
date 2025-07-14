@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 
 const Header = () => {
     const pathname = usePathname();
+    if (pathname.startsWith("/dashboard")) return <></>;
     return (
         <header className="w-screen sticky  z-[100] left-0 top-0 flex bg-secondary-500 justify-center border-b border-[#A0A0A0]">
             <div className="w-full relative flex  items-center container  py-3 sm:p-3 px-2 sm:px-5">
@@ -18,7 +19,7 @@ const Header = () => {
                 >
                     {SiteInfo.siteName}
                 </Link>
-                {Pages.map((page) => (
+                {Pages.slice(0, 2).map((page) => (
                     <Link
                         key={page.href}
                         className={` w-full uppercase hover:text-red-300 text-center duration-200 font-semibold sm:text-blogTitle text-xl lg:text-logo   z-10 ${
@@ -54,6 +55,7 @@ const HeaderBackground = () => {
                     <m.line
                         key={index}
                         strokeDasharray="2718 2718"
+                        vectorEffect={"non-scaling-stroke"}
                         initial={{ strokeDashoffset: 2718 }}
                         animate={{
                             strokeDashoffset: 0,

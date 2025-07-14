@@ -12,3 +12,6 @@ export const defaultTimeStamps = {
     created_at: t.timestamp().defaultNow().notNull(),
     // deleted_at: t.timestamp(),
 };
+
+
+export const generateIndexName  = (table: string, field: string) => `${table}_${field}_index`;

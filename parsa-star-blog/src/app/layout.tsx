@@ -4,11 +4,16 @@ import "./globals.css";
 import localFont from "next/font/local";
 
 import { Roboto, Roboto_Mono } from "next/font/google";
-import { domAnimation, LazyMotion } from "motion/react";
 import { LenisWrapper } from "@/app/lenisWrapper";
 import Background from "@/components/common/background";
 import Header from "@/components/common/header";
 import Footer from "@/components/footer/footer";
+import dynamic from "next/dynamic";
+import Provider from "./provider";
+
+const Toaster = dynamic(() => import("@/components/ui/sonner"), {
+    loading: () => null,
+});
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -46,12 +51,15 @@ export default function RootLayout({
             <body
                 className={`${Thunder.className} ${roboto.variable} ${robotoMono.variable} antialiased h-full bg-secondary-500`}
             >
-                <LazyMotion features={domAnimation} strict>
-                    <Header />
-                    <LenisWrapper>{children}</LenisWrapper>
-                    <Background />
-                    <Footer />
-                </LazyMotion>
+                <Provider>
+               
+                        <Header />
+                        <LenisWrapper>{children}</LenisWrapper>
+                        <Background />
+                        <Footer />
+
+                    <Toaster richColors position="top-right" />
+                </Provider>
             </body>
         </html>
     );

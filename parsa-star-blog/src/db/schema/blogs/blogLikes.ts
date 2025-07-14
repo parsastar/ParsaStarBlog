@@ -1,28 +1,26 @@
 import { defaultTimeStamps } from "@/db/helper";
 import { relations } from "drizzle-orm";
 import * as t from "drizzle-orm/pg-core";
-import { userT } from "../user";
+import { userT } from "../user/user";
 import { blogT } from "./blog";
 
 export const blogLikesT = t.pgTable(
     "blog_likes",
     {
-        userId: t
+        user_id: t
             .integer()
             .notNull()
             .references(() => userT.id, { onDelete: "cascade" }),
-        blogId: t
+        blog_id: t
             .integer()
             .notNull()
             .references(() => blogT.id, { onDelete: "cascade" }),
         ...defaultTimeStamps,
     },
-    (table) => [t.primaryKey({ columns: [table.blogId, table.userId] })]
+    (table) => [t.primaryKey({ columns: [table.blog_id, table.user_id] })]
 );
 
 export const BlogLikesRelations = relations(blogLikesT, ({ one }) => ({
-    user: one(userT, { fields: [blogLikesT.userId], references: [userT.id] }),
-    blog: one(blogT, { fields: [blogLikesT.blogId], references: [blogT.id] }),
+    user: one(userT, { fields: [blogLikesT.user_id], references: [userT.id] }),
+    blog: one(blogT, { fields: [blogLikesT.blog_id], references: [blogT.id] }),
 }));
-
-
